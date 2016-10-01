@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>ajax</title>
+		<style>
+			#loader {
+				width:100%;
+				height:100%;
+				background-color:#EDE9DF;
+				position: fixed;
+				left:0;
+				top:0;
+				background-image:url(img/loader.gif);
+				background-repeat: no-repeat;
+				background-position: center;
+				/*
+				 * 기본으로 숨겼다가
+				 */
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<button>요청!</button>
+		<h1>남자배우 목록</h1>
+		<table border="1">
+			<caption>남자배우목록</caption>
+			<thead>
+				<tr>
+					<th>이름</th>
+					<th>키</th>
+					<th>몸무게</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td colspan="3">없습니다.</td>
+				</tr>
+			</tbody>
+		</table>	
+		<div id="loader"></div>
+		<script src="js/jquery.js"></script>
+		<script>
+
+			$('button').click(function() {
+				$('#loader').show();
+
+				$.ajax(
+					"ajax/actors.json",
+					{
+						type : 'GET',
+						dataType: 'json',
+						error: function(err){
+							console.log(err)
+						},
+						success: function(result){
+							$('#loader').hide();
+							$table = $('tbody');
+							$table.empty();
+							result.forEach(function(item, index, array){
+								console.log(item);
+								$tr1 = $('<tr></tr>');
+								$td1 = $('<td>').text(item.name);
+								$td2 = $('<td>').text(item.height);
+								$td3 = $('<td>').text(item.weight);
+
+								$tr1.append($td1, $td2, $td3);
+								$table.append($tr1);
+							});
+						}
+					}
+				)
+
+			});
+
+
+		
+		</script>
+	
+	</body>
+</html>
+
+
+
+
+

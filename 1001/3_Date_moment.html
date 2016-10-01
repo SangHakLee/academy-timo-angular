@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<title>Date_moment</title>
+		<style>
+			#time {
+				margin:70px;
+				text-align:center;
+				font-size:60px;
+				font-weight:bold;
+			}
+		</style>
+	</head>
+	<body>
+		<h1 id="time"></h1>
+	</body>
+	<script src="js/jquery.js"></script>
+	<script src="js/moment-with-locales.js"></script>
+	<script>
+		var now = new Date();
+		console.log(now)
+
+
+		moment.locale('ko')
+		var now2 = moment();
+//
+//		var fulldate = now2.format('YYYY MM DD HH:mm:ss');
+//		$('h1').text(fulldate);
+
+		setInterval( function () {
+			(function(){
+				$('h1').text(
+						moment().format('YYYY MM DD HH:mm:ss')
+				);
+			})()
+
+		}, 10000);
+	</script>
+</html>

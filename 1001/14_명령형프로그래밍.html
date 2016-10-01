@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>명령형 프로그래밍</title>
+    <style>
+
+        img {
+            width:300px;
+            box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21);
+        }
+
+        #toggleImg {
+            transition: .4s ease;
+            transform:perspective(500px) rotateY(0deg) scale(1);
+        }
+        #toggleImg.mini {
+            transform:perspective(500px) rotateY(720deg) scale(.5);
+        }
+
+        #img1 {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>명령형 프로그래밍은?</h1>
+    <div id="box">
+        <p>
+            <input type="checkbox" id="toggle">
+            <label for="toggle">숨기기</label>
+        </p>
+        <img src="poster/poster3.png" width="300" id="toggleImg"/>
+        <img src="poster/poster2.png" width="300" id="img1"/>
+        <img src="poster/poster5.png" width="300" id="img2"/>
+    </div>
+
+</body>
+</html>
