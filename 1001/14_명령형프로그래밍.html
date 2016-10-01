@@ -15,7 +15,7 @@
             transform:perspective(500px) rotateY(0deg) scale(1);
         }
         #toggleImg.mini {
-            transform:perspective(500px) rotateY(720deg) scale(.5);
+            transform:perspective(500px) rotateY(720deg) scale(.2);
         }
 
         #img1 {
@@ -30,10 +30,31 @@
             <input type="checkbox" id="toggle">
             <label for="toggle">숨기기</label>
         </p>
-        <img src="poster/poster3.png" width="300" id="toggleImg"/>
-        <img src="poster/poster2.png" width="300" id="img1"/>
-        <img src="poster/poster5.png" width="300" id="img2"/>
+        <img src="poster/p3.png" width="300" id="toggleImg"/>
+        <img src="poster/p2.png" width="300" id="img1"/>
+        <img src="poster/p5.png" width="300" id="img2"/>
     </div>
+    <script src="js/jquery.js"></script>
 
+    <script>
+        $('#toggle').click(function() {
+
+            // attr은 undefined
+            var toggle = $(this).prop('checked');
+            console.log(toggle)
+
+            if ( toggle ) {
+                $(this).next().text('보이기');
+                $('#toggleImg').addClass('mini')
+                $('#img1').show();
+                $('#img2').hide();
+            } else {
+                $(this).next().text('숨기기')
+                $('#toggleImg').removeClass('mini')
+                $('#img1').hide();
+                $('#img2').show();
+            }
+        })
+    </script>
 </body>
 </html>

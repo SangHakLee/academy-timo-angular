@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" ng-app="exApp">
 <head>
     <meta charset="UTF-8">
     <title>선언형 프로그래밍</title>
-    <link rel="stylesheet" href="css/angular-switcher.css"/>
     <style>
 
         img {
@@ -26,17 +25,26 @@
         .switcher.active .switcher-label.true {color:deepskyblue}
     </style>
 </head>
-<body>
+<body ng-controller="ctrl">
 <h1>선언형 프로그래밍은?</h1>
 <div id="box">
     <p>
-        <input type="checkbox" id="toggle" >
-        <label for="toggle">보이기</label>
+        <input type="checkbox" id="toggle" ng-model="toggle">
+        <label for="toggle">{{toggle?'보이기':'숨기기'}}</label>
     </p>
-    <img src="poster/poster3.png" width="300" id="toggleImg" />
-    <img src="poster/poster4.png" width="300" id="img1"/>
-    <img src="poster/poster6.png" width="300" id="img2"/>
+    <img src="poster/p3.png" width="300" id="toggleImg" ng-class="{mini:toggle}"/>
+    <img src="poster/p4.png" width="300" id="img1" ng-show="toggle"/>
+    <img src="poster/p6.png" width="300" id="img2" ng-hide="toggle"/>
 </div>
+<script src="js/angular.min.js"></script>
+<script>
+
+    var app = angular.module('exApp', []);
+
+    app.controller('ctrl', ['$scope', function($scope) {
+    }]);
+
+</script>
 
 </body>
 </html>

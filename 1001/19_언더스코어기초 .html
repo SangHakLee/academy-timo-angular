@@ -6,16 +6,53 @@
 </head>
 <body>
 
+    <h1>리시트</h1>
+    <ul>
+
+    </ul>
+
+    <script type="text/template" id="li">
+        <% $(animals).each(function() { %>
+        <li> <%=this%> </li>
+        <% }) %>
+    </script>
+
     <!--언더스코어 템플릿-->
-    <script></script>
+    <script type="text/template" id="tmp">
+        <tr>
+            <td> <%=name%> </td>
+            <td> <%=height%> </td>
+            <td> <%=weight%> </td>
+        </tr>
+    </script>
 
-
+    <script src="js/jquery.js"></script>
     <script src="js/underscore.js"></script>
     <script>
 
 //        var tmp = _.template('<h1>안녕하세요.</h1>');
-        var tmp = _.template('<h1>안녕하세요.</h1>');
-        console.log(tmp() );
+//        var tmp = _.template( $('#tmp').html() );
+
+//        var markup = tmp({
+//            name : '정우',
+//            height : 180,
+//            weight : 80
+//        });
+
+//        console.log(tmp );
+//        alert(markup)
+
+//        $('body').append(markup);
+
+        var tmp = _.template( $('#li').html() );
+
+        var markup = tmp({
+            animals : [
+                    '사자', '말', '거북이', '당근'
+            ]
+        });
+
+        $('li').append(markup);
 
 
     </script>

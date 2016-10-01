@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="helloApp">
 <head>
 <meta charset="UTF-8">
 <title>Hello Angular.js</title>
@@ -7,7 +7,7 @@
 <style>
 	body {
 		font-family: 'Kakao', sans-serif;
-        
+
 	}
     h1,h2 {
         font-weight: 200;
@@ -18,14 +18,23 @@
 	}
 </style>
 </head>
-<body>
-<h1>Angular를 이용해봅시다.^-^</h1>
- 	
-    
+<body ng-controller="ctrl">
+<h1> Angular를 이용해봅시다.^-^</h1>
+<input type="text" ng-model="txt"/>
+<h2>{{txt}}</h2>
+<h3>{{txt}}</h3>
+
+
+<script src="js/angular.min.js"></script>
+<script>
+	// 앵귤러의 기본
+	var app = angular.module('helloApp', []);
+
+	app.controller('ctrl', ['$scope', function($scope){
+		// alert('aaa');
+		$scope.txt = '안녕하세요';
+	}]);
+
+</script>
  </body>
  </html>
- 
- 
- 
- 
- 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="repeatApp">
 <head>
     <meta charset="UTF-8">
     <title>영화내용 출력페이지</title>
@@ -36,17 +36,34 @@
     </style>
 </head>
 
-<body>
-    <h1>영화목록<em></em>개</h1>
-    <button>삭제</button>
+<body ng-controller="ctrl">
+    <h1>영화목록<em>{{movies.length}}</em>개</h1>
+    <button ng-click="deleteMovie()">삭제</button>
     <ul>
-        
-        <li>
-            <img src="poster/p1.png" width="160" />
-            <h3>아수라</h3>
+        <li ng-repeat="movie in movies">
+            <img src="poster/{{movie.poster}}" width="160" />
+            <h3>{{movie.name}}</h3>
         </li>
     </ul>
-    
+
+    <script src="js/angular.min.js"></script>
+    <script>
+
+        var app = angular.module('repeatApp', []);
+        app.controller('ctrl', ['$scope', '$http', function($scope, $http){
+            var promise = $http({
+                url : 'ajax/movies.json'
+            });
+
+            promise.success(function(result){
+                $scope.movies = result;
+            });
+
+            $scope.deleteMovie = function(){
+                $scope.movies.shift();
+            }
+        }]);
+    </script>
 </body>
 
 </html>

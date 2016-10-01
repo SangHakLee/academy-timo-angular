@@ -39,13 +39,42 @@
 	<h1>영화목록<em>?</em>개</h1>
 	<button id="deleteBtn">삭제</button>
 	<ul>
-        
+
 	</ul>
+
+    <script type="text/template" id="movieTmp">
+        <% _.each(movies, function(movie) { %>
+        <li>
+            <img src="poster/<%=movie.poster%>" alt="" width="120">
+            <h3><%=movie.name%></h3>
+        </li>
+        <% }) %>
+    </script>
+
    
 <script src="js/jquery.js"></script>
 <script src="js/underscore.js"></script>
 <script>
- 
+    $.ajax('ajax/movies.json', {
+        dataType : 'json',
+        type : 'get',
+        success : function(result) {
+            console.log(result)
+
+            $('em').text(result.length)
+
+            var tmp = _.template( $('#movieTmp').html() );
+
+            $('ul').append(tmp( {movies: result} ) );
+
+
+        }
+    })
+
+    $('#deleteBtn').click(function(){
+//        $('em').text(li.length
+        $('li').first().remove();
+    })
 </script>
 </body>
 </html>

@@ -20,9 +20,36 @@
 					<td colspan="3">없습니다.</td>
 				</tr>
 			</tbody>
-		</table>	
-		
-		
+		</table>
+
+		<script type="text/template" id="actors">
+			<% $(actors).each(function () { >
+			<tr>
+				<td> <%=this.name%> </td>
+				<td> <%=this.height%> </td>
+				<td> <%=this.weight%> </td>
+			</tr>
+			<% }) %>
+		</script>
+
+	<script src="js/jquery.js"></script>
+	<script src="js/underscore.js"></script>
+	<script>
+		$.ajax('ajax/actors.json', {
+			type : 'GET',
+			dataType : 'json',
+			success : function(result) {
+				console.log(result)
+				$('tbody').empty();
+
+				var tmp = _.template( $('cators', 청소));
+
+				var markup = tmp({actots}, tmp);
+
+				
+			}
+		})
+	</script>
 	</body>
 </html>
 
