@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>할일관리프로그램</title>
+    <link rel="stylesheet" href="css/kakao.font.css"/>
+    <link rel="stylesheet" href="css/angular-switcher.css"/>
+    <style>
+       <style>
+        body {
+            font:200 20px "Kakao",sans-serif;
+        }
+        #wrap {
+            width:800px;
+            margin:auto;
+            box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+            padding:20px;
+        }
+        input,button {
+            padding: 5px;
+            font:200 20px "Kakao",sans-serif;
+        }
+        button {
+            background:#9E9E9E;
+            border:none;
+            cursor: pointer;
+            padding:8px 12px;
+            color:#fff;
+            transition: .2s ease;
+        }
+        button:hover {
+            background: #424242;
+            box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+        }
+        /* bar height */
+        .styled .switcher-line:before { height: 20px; }
+        /* bar backgrounds */
+        .styled .switcher-line:before { background: #e35144; }
+        .styled .active .switcher-line:before { background: deepskyblue; }
+
+        ul {
+            padding:0;
+        }
+        li {
+            color:crimson;
+            list-style: none;
+        }
+        li.end {
+            color:deepskyblue;
+        }
+        
+        li.ng-animate {
+            /*애니메이션될 요소의 기본 css */
+            transition: .5s ease;
+        }
+        li.ng-enter {
+            transform: translate(-2000px,0);
+        }
+        li.ng-enter.ng-enter-active {
+            transform: translate(0,0);
+        }
+        li.ng-leave {
+            transform: translate(0,0);
+        }
+        li.ng-leave.ng-leave-active {
+            transform: translate(-2000px,0);
+        }
+
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+    </style>
+        
+    </style>
+</head>
+<body>
+<div id="wrap">
+<h1>님의 할일목록</h1>
+<p>
+    전체할일 : <em>1</em>개 
+    / 
+    미완료 : <span>1</span>개
+    <button>완료된 할일제거</button>
+</p>
+<form>
+<fieldset>
+    <legend>할일입력폼</legend>
+    <input type="text" placeholder="할 일입력"/>
+    <button>입력</button>
+</fieldset>
+</form>
+<h2>할일목록</h2>
+<ul>
+<li>
+
+   <button>삭제</button>
+</li>
+</ul>
+</div>
+
+</body>
+</html>
+
+
+

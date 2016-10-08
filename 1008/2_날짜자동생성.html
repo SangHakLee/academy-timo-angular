@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>날짜 자동생성</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/notosanskr.css"/>
+    <style>
+        body {
+            font:500 24px "Noto Sans KR",sans-serif;
+        }
+        select {
+            font:500 24px "Noto Sans KR",sans-serif;
+            padding:6px 10px;
+            margin:0 3px;
+        }
+    </style>
+</head>
+<body>
+<select id="year">
+    
+</select>년
+    
+<select id="month">
+    
+</select>월
+
+<select id="date">
+    
+</select>일
+
+
+<script src="js/jquery.js"></script>
+<script src="js/moment-with-locales.js"></script>
+<script>
+
+
+    function monthMaker() {
+        for ( var i = 1 ; i <= 12 ; i++ ){
+            $('<option>').text(i).appendTo('#month');
+        }
+        var nowMonth = moment().month()+1;
+        $('#month').val(nowMonth);
+
+    }
+
+    function yearMaker() {
+        var nowYear = moment().year();
+        while(nowYear > 1970) {
+            $('<option>').text(nowYear).appendTo('#year');
+            nowYear--;
+        }
+    }
+
+    $('#year, #month').change(function(){
+        var nowYear = $('#year option:selected').val();
+        var nowMonth = $('#month option:selected').val();
+        var endDay = moment(nowYear+'-'+nowMonth, 'YYYY-MM').daysInMonth();
+        dayMaker(endDay);
+    });
+
+    function dayMaker(endDay) {
+        var nowDay = $('#date option:selected').val();
+        $('#date option').remove();
+        for ( var i = 1 ; i <= endDay ; i++ ){
+            $('<option>').text(i).appendTo('#date');
+        }
+        $('#date').val(nowDay);
+
+    }
+
+
+    yearMaker();
+    monthMaker();
+    dayMaker(moment().daysInMonth());
+    $('#date').val(moment().day());
+
+
+</script>
+</body>
+</html>

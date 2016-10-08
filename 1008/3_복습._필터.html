@@ -1,0 +1,66 @@
+<!doctype html>
+<html ng-app="filterApp">
+<head>
+    <meta charset="UTF-8">
+    <title>angular복습 / filter</title>
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+</head>
+<body ng-controller="ctrl">
+<h1>스마트폰 목록</h1>
+<label>검색 : <input type="text" ng-model="q" kr-input="" placeholder="이름검색"/></label>
+<label><input type="radio" ng-model="price" name="order" value="price"/>가격   <i class="fa fa-arrow-up"></i></label>
+<label><input type="radio" ng-model="price" name="order" value="-price"/>가격   <i class="fa fa-arrow-down"></i></label>
+<label><input type="radio" ng-model="price" name="order" value="release"/>출시일 <i class="fa fa-arrow-up"></i></label>
+<label><input type="radio" ng-model="price" name="order" value=""-release/>출시일 <i class="fa fa-arrow-down"></i></label>
+
+
+<ul ng-repeat="phone in phoneList | filter: {name:q} | orderBy:price">
+    <li>
+        <h3>{{phone.name}}</h3>
+        <strong>{{phone.price | currency : undefined:0}} </strong>
+        <p>{{phone.release | date : 'yyyy년 MM월 dd'}}</p>
+    </li>
+</ul>
+
+
+
+
+
+<script src="js/angular.min.js"></script>
+<script src="js/angular-locale_ko.js"></script>
+<script src="js/angular-ko.input.js"></script>
+<script>
+
+//    krInput 은 한글 입력 도와주는 디렉티브
+
+
+
+    var app = angular.module('filterApp', ['kr-input']);
+
+    app.controller('ctrl', ['$scope', function($scope){
+        $scope.phoneList = [
+            {
+                name:'아이폰',
+                price:4000,
+                release:new Date()
+            },
+            {
+                name:'갤럭시',
+                price:3000,
+                release:new Date()
+            },
+            {
+                name:'V20',
+                price:7000,
+                release:'2016-10'
+            },
+            {
+                name:'비와이',
+                price:1000,
+                release:'2016-03'
+            }
+        ];
+    }]);
+</script>
+</body>
+</html>

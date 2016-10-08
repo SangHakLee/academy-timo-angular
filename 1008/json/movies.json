@@ -1,0 +1,8 @@
+[
+  {"no":0,"poster":"poster1.png","director":"팀 버튼","name":"미스 페레그린과 이상한 아이들의 집","likes":55,"dislikes":32,"price":18000, "release":"2016-09-28"},
+  {"no":1,"poster":"poster2.png","director":"페데 알바레즈","name":"맨 인 더 다크","likes":16,"dislikes":12,"price":15000, "release":"2016-10-05"},
+  {"no":2,"poster":"poster3.png","director":"김성수","name":"아수라","likes":106,"dislikes":12,"price":21000, "release":"2016-09-28"},
+  {"no":3,"poster":"poster4.png","director":"샤론 맥과이어","name":"브리짓 존스의 베이비","likes":106,"dislikes":12,"price":12000, "release":"2016-09-28"},
+  {"no":4,"poster":"poster5.png","director":"김지운","name":"밀 정","likes":106,"dislikes":12,"price":17000, "release":"2016-09-07"},
+  {"no":5,"poster":"poster6.png","director":"클린트 이스트우드","name":"설리: 허드슨강의 기적","likes":106,"dislikes":12,"price":22000, "release":"2016-09-28"}
+]

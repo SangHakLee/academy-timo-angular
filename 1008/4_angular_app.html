@@ -1,0 +1,59 @@
+<!doctype html>
+<html ng-app="movieApp">
+  <head>
+  	<meta charset="UTF-8" />
+  	<title>Movie BoxOffice</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/main.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/kakao.font.css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+  </head>
+  <body ng-controller="movieCtrl">
+    <div class="header">
+      <div class="container">
+        <h1>영화 목록</h1>
+      </div>
+    </div>
+    <div class="main">
+      <div class="container">
+        <h2>박스오피스</h2>
+  <ul ng-repeat="movie in movies">
+      <li class="col-md-4">
+        <div class="thumbnail">
+          <img src="poster/{{movie.poster}}" alt="poster">
+          <h3 class="title">{{movie.name}}</h3>
+          <time class="date">{{movie.release}}</time>
+          <strong class="price">{{movie.price}}</strong>
+          <div class="rating">
+            <button class="likes"><i class="fa fa-thumbs-up"></i>{{movie.likes}}</button>
+            <button class="dislikes"><i class="fa fa-thumbs-down"></i>{{movie.dislikes}}</button>
+          </div>
+        </div>
+      </li>
+  </ul> 
+      </div>
+    </div><!-- movieController -->
+    <div class="footer">
+      <div class="container">
+        <h2>&copy; 2016 jna</h2>
+      </div>
+    </div>
+
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-locale_ko.js"></script>
+    <script>
+      var app = angular.module('movieApp', []);
+      app.controller('movieCtrl', ['$scope', '$http', function($scope, $http){
+        var promise = $http({
+          method:'GET',
+          url: 'json/movies.json'
+        });
+
+        promise.success(function(res){
+          $scope.movies = res;
+        })
+      }]);
+    </script>
+
+  </body>
+</html>
