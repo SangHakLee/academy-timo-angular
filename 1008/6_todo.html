@@ -1,12 +1,11 @@
 <!doctype html>
-<html>
+<html ng-app="todoApp">
 <head>
     <meta charset="UTF-8">
     <title>할일관리프로그램</title>
     <link rel="stylesheet" href="css/kakao.font.css"/>
     <link rel="stylesheet" href="css/angular-switcher.css"/>
     <style>
-       <style>
         body {
             font:200 20px "Kakao",sans-serif;
         }
@@ -70,34 +69,83 @@
             display: none !important;
         }
     </style>
-        
-    </style>
 </head>
-<body>
+<body ng-controller="ctrl">
 <div id="wrap">
 <h1>님의 할일목록</h1>
 <p>
-    전체할일 : <em>1</em>개 
+    전체할일 : <em ng-bind="todos.length"></em>개
     / 
-    미완료 : <span>1</span>개
-    <button>완료된 할일제거</button>
+    미완료 : <span ng-bind="(todos | filter: {end:false}).length "></span>개
+    <button ng-click="complete(todos)">완료된 할일제거</button>
+    <button ng-click="removeAll(todos)">모든 할일제거</button>
 </p>
 <form>
 <fieldset>
     <legend>할일입력폼</legend>
-    <input type="text" placeholder="할 일입력"/>
-    <button>입력</button>
+    <input type="text" placeholder="할 일입력" ng-model="work"/>
+    <button ng-click="add(work)">입력</button>
 </fieldset>
 </form>
 <h2>할일목록</h2>
-<ul>
-<li>
-
-   <button>삭제</button>
+<ul ng-repeat="todo in todos">
+<li ng-class="{end:todo.end}">
+    <label >
+        <input type="checkbox" ng-click="check(todos, $index)">
+        {{todo.title}}
+    </label>
+   <button ng-click="remove(todos, $index)">삭제</button>
 </li>
 </ul>
 </div>
+<script src="js/angular.min.js"></script>
+<script src="js/angular-locale_ko.js"></script>
+<script src="js/angular-switcher.js"></script>
+<script src="js/underscore.js"></script>
+<script>
+    var app = angular.module('todoApp', []);
 
+    app.controller('ctrl', ['$scope', function($scope) {
+
+        $scope.todos = [
+        ];
+
+        $scope.remove = function(todos, $index){
+            todos.splice($index, 1);
+        };
+
+        $scope.add = function(work) {
+            $scope.todos.push({title:work, end:false});
+            $scope.work = "";
+//            $scope.focusedElement = work;
+        };
+
+        $scope.check = function(todos, $index) {
+            todos[$index].end = !todos[$index].end;
+        };
+
+        $scope.complete = function(todos) {
+
+            var arr = [];
+
+            todos.forEach(function(item, index, array) {
+                if ( !item.end ) {
+                    arr.push(item);
+                }
+            });
+
+            $scope.todos = arr;
+
+        };
+
+        $scope.removeAll = function(todos) {
+            todos.splice(0, todos.length);
+        };
+
+
+    }]);
+
+</script>
 </body>
 </html>
 

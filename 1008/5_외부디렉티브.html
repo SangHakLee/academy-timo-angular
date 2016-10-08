@@ -22,6 +22,37 @@
 </head>
 <body>
 <h1>날짜선택</h1>
+<!--<div moment-picker="myDate" locale="ko"> {{ myDate }} </div>-->
 
+<input moment-picker="date" locale="ko" type="datetime" ng-model="date">
+
+
+
+<switcher ng-model="basic"></switcher>
+
+
+
+<switcher ng-model="values"
+          true-value="'€'"
+          true-label="EUR"
+          false-value="'$'"
+          false-label="USD">
+</switcher>
+
+
+
+
+
+<!--<button moment-picker="date" locale="ko">날짜 </button>-->
+<!--<p>{{date}}</p>-->
+
+<script src="js/angular.min.js"></script>
+<script src="js/moment-with-locales.js"></script>
+<script src="js/angular-moment-picker.js"></script>
+<script src="js/angular-switcher.js"></script>
+<script>
+    var app = angular.module('directiveApp', ['moment-picker', 'switcher'])
+
+</script>
 </body>
 </html>
