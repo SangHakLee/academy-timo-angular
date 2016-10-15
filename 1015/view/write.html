@@ -1,0 +1,9 @@
+<h2>할 일 입력</h2>
+<form ng-submit="writeTodo(title)">
+    <fieldset>
+        <legend>입력</legend>
+        <input type="text" placeholder="입력해주세요" ng-model="title"/>
+        <button>전송</button>
+    </fieldset>
+</form>
+<img src="img/loader.gif" alt="로딩중" ng-show="loader">

@@ -327,6 +327,24 @@ button::-moz-focus-inner {
 		<script src="js/jquery.js"></script>
 		<!-- underscore.js 가져다놓기 -->
 		<script src="js/underscore.js"></script>
-		
+
+		<script type="text/template" id=""></script>
+
+		<script>
+			var $window = $(window);
+
+			$window.scroll(function(){
+				var sTop = $window.scrollTop();
+
+				// css로 선택시  px 가 붙음음
+				var dHeigth = $(document).hegit();
+
+				var wHeight = $window.height();
+
+				if ( dHeigth == (wHeight + sTop) ) {
+					//여기서 템플릿 이용해서 새로운 div 추가
+				}
+			});
+		</script>
 	</body>
 </html>

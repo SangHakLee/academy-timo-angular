@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50px;
+            box-shadow: 5px 10px 10px grey;
+
+            margin: 20px 0;
+            position: relative;
+            left: 0;
+        }
+
+        #css3 {
+            background: antiquewhite;
+            transition: .3s easy;
+        }
+
+        #css3.move {
+            left: 500px;
+        }
+
+        #jquery {
+            background: deepskyblue;
+        }
+
+    </style>
+</head>
+<body>
+    <p>
+        <button>움직여</button>
+    </p>
+    <div id="css3" class="circle"></div>
+    <div id="jquery" class="circle"></div>
+
+    <script src="js/jquery.js"></script>
+    <script>
+        $('button').click(function(){
+
+//            $('#css3').css('left',100);
+            $('#css3').addClass('move');
+
+            $('#jquery').animate({
+                left:500
+            }, 300, 'linear')
+        });
+    </script>
+</body>
+</html>

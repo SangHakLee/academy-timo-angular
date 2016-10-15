@@ -29,6 +29,15 @@
 <div id="box">
     <div id="child"></div>
 </div>
+<script src="js/jquery.js"></script>
+<script>
+    $('#child').on('click', function(){
+        var offset = $('#child').offset();
+        var position = $('#child').position();
 
+        console.log(offset);
+        console.log(position);
+    });
+</script>
 </body>
 </html>

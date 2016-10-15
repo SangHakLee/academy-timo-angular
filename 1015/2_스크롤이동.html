@@ -216,8 +216,22 @@
 		</div><!-- #wrap end -->
 		<script src="js/jquery.js"></script>
 		<script>
+			$('#nav li').click(function(e){
+				e.preventDefault();
+				$('.now').removeClass('now');
+				$(this).addClass('now');
 
-				
+				// 크롬음 body 만 FF는 html도 있어야함
+
+				var idx = $(this).index();
+
+				var bTop = $('#content div').eq(idx).offset().top;
+
+				// 로고 있는 부분 이 122 이기 때문에 -122 필요
+				$('html').animate({scrollTop:bTop-122}, 300);
+
+			});
+
 
 		</script>
 	</body>

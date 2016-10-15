@@ -57,6 +57,121 @@ body {
 </div>
 <script src="js/angular.min.js"></script>
 <script src="js/angular-route.min.js"></script>
+<script>
+	var app = angular.module('ajaxApp',['ngRoute']);
 
+	app.config(function($routeProvider){
+		$routeProvider.when('/todo', {
+			'templateUrl' : 'view/todo.html',
+			'controller'  : 'todoCtrl'
+		});
+		$routeProvider.when('/write', {
+			'templateUrl' : 'view/write.html',
+			'controller'  : 'writeCtrl'
+		});
+		$routeProvider.otherwise({
+			'redirectTo' : '/todo'
+		})
+	});
+
+	app.controller('todoCtrl', ['$scope', '$http', function($scope, $http){
+
+
+		function getTodos(){
+			$scope.loader = true;
+
+			var promise = $http({
+				url : 'https://api.mlab.com/api/1/databases/jna/collections/todos',
+				method : 'get',
+				params : {
+					apiKey : 'tFTRJmWy5IHOBim8tCb0RGF4jxPYFOWP'
+				}
+			});
+			promise.error(function(err){
+				console.log('err :', err);
+			});
+			promise.success(function(result){
+				console.log('result :', result);
+
+				$scope.loader = false;
+				$scope.todos = result;
+			});
+		};
+		getTodos();
+
+		$scope.removeTodo = function(todo){
+			$scope.loader = true;
+			var id = todo._id.$oid;
+			var promise = $http({
+				url : 'https://api.mlab.com/api/1/databases/jna/collections/todos/'+id,
+				method : 'delete',
+				params : {
+					apiKey : 'tFTRJmWy5IHOBim8tCb0RGF4jxPYFOWP'
+				}
+			});
+
+			promise.error(function(err){
+				console.log('err :', err);
+			});
+			promise.success(function(result){
+
+				$scope.loader = false;
+				getTodos();
+			});
+		};
+
+		$scope.editTodo = function(todo) {
+			$scope.loader = true;
+			var id = todo._id.$oid;
+			var title = todo.title;
+			var end = todo.end;
+//			var title = prompt('변경 할 제목을 입력하세요');
+			var promise = $http({
+				url : 'https://api.mlab.com/api/1/databases/jna/collections/todos/'+id,
+				method : 'put',
+				params : {
+					apiKey : 'tFTRJmWy5IHOBim8tCb0RGF4jxPYFOWP'
+				},
+				data : {
+					title : title,
+					end : end
+				}
+			})
+
+			promise.error(function(err){
+				console.log('err :', err);
+			});
+			promise.success(function(result){
+				$scope.loader = false;
+				getTodos();
+			});
+		}
+	}]);
+
+	app.controller('writeCtrl', ['$scope', '$http', '$location', function($scope, $http, $location){
+		$scope.writeTodo = function(title) {
+			$scope.loader = true;
+			var promise = $http({
+				url : 'https://api.mlab.com/api/1/databases/jna/collections/todos',
+				method : 'post',
+				params : {
+					apiKey : 'tFTRJmWy5IHOBim8tCb0RGF4jxPYFOWP'
+				},
+				data : {
+					title : title,
+					end : false
+				}
+			});
+
+			promise.error(function(err){
+				console.log('err :', err);
+			});
+			promise.success(function(result){
+				$scope.loader = false;
+				$location.url('/todo');
+			});
+		}
+	}]);
+</script>
 </body>
 </html>
