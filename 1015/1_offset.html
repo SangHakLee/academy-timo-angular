@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>offset과 position</title>
+    <style>
+        #box {
+            width:600px;
+            height:400px;
+            position: fixed;
+            left:50%;
+            top:50%;
+            margin:-200px 0 0 -300px;
+            background:#888;
+        }
+        #child {
+            width:200px;
+            height:200px;
+            position: relative;
+            left:200px;
+            top:100px;
+            background: #00bfff;
+            cursor: pointer;
+            box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div id="child"></div>
+</div>
+
+</body>
+</html>

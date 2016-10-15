@@ -31,11 +31,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="6_todo.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="6_todo.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/6_todo.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="451">
               <caret line="132" column="23" selection-start-line="132" selection-start-column="23" selection-end-line="132" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="8_animation.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/8_animation.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="594">
+              <caret line="77" column="18" selection-start-line="77" selection-start-column="17" selection-end-line="77" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -81,6 +91,7 @@
         <option value="$PROJECT_DIR$/4_angular_app.html" />
         <option value="$PROJECT_DIR$/5_외부디렉티브.html" />
         <option value="$PROJECT_DIR$/6_todo.html" />
+        <option value="$PROJECT_DIR$/8_animation.html" />
       </list>
     </option>
   </component>
@@ -239,12 +250,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1475888636691</updated>
-      <workItem from="1475888638617" duration="14059000" />
+      <workItem from="1475888638617" duration="14694000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14059000" />
+    <option name="totallyTimeSpent" value="14694000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="840" y="23" width="840" height="970" extended-state="0" />
@@ -348,14 +359,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/8_animation.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/7_route.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-291">
@@ -392,6 +395,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="451">
           <caret line="132" column="23" selection-start-line="132" selection-start-column="23" selection-end-line="132" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/8_animation.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="77" column="18" selection-start-line="77" selection-start-column="17" selection-end-line="77" selection-end-column="19" />
           <folding />
         </state>
       </provider>

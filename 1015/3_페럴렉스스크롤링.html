@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>apple music</title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="css/reset.css" />
+    <style>
+        body {
+            font-family:'Lato', sans-serif;
+        }
+        .screen_out {overflow:hidden;position:absolute;width:0;height:0;line-height:0;text-indent:-9999px}
+
+        #loader {
+            width:100%;
+            height:100%;
+            position: fixed;
+            left:0;
+            top:0;
+            background-color:#EDE9DF;
+            background-image:url(img/loader.gif);
+            background-position: center;
+            background-repeat:no-repeat;
+            z-index: 100;
+        }
+        #header {
+            width:100%;
+            height:120px;
+            background:rgba(0,0,0,.1);
+            position: fixed;
+            z-index:1;
+
+        }
+        #header.ani {
+            transition: .2s ease;
+        }
+        #header .fa-apple {
+         color:#fff;
+
+        }
+        #header.ani .fa-apple {
+            transition: .2s ease;
+        }
+        #header h1 {
+            position: absolute;
+            width:60px;
+            height:60px;
+            font-size:60px;
+            line-height:60px;
+            text-align: center;
+            margin:auto;
+            top:20px;
+            left:0;
+
+        }
+        #header.ani h1 {
+            transition: .2s ease;
+        }
+        #header.main {
+            height:50px;
+            background:#fff;
+        }
+        #header.main h1 {
+            width:40px;
+            height:40px;
+            font-size:40px;
+            line-height:40px;
+            top:5px;
+            left:5px !important;
+        }
+        #header.main .fa-apple {
+            color:#424242;
+        }
+        #header.main #gnb {
+            right:10px !important;
+            top:15px;
+        }
+        #gnb {
+            position: absolute;
+            text-align: center;
+            width:320px;
+            height:20px;
+            top:90px;
+            right:0;
+
+        }
+        #header.ani #gnb {
+            transition: .2s ease;
+        }
+        #header.main a {
+            font-size:18px;
+            color:#424242;
+        }
+        #gnb li {
+            display: inline-block;
+            margin:0 14px;
+        }
+        #header.ani #gnb a {
+            transition: .2s ease;
+        }
+        #gnb a {
+            color:#fff;
+            font-size:20px;
+            text-decoration: none;
+            font-weight: 100;
+        }
+        #videoBox {
+            width:100%;
+            height:1200px;
+            left:0;
+            top:0;
+            position: fixed;
+            z-index: -100;
+        }
+
+        #videoBox video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translateX(-50%) translateY(-50%);
+        }
+
+        .section {
+            color:#fff;
+        }
+        #copy, #intro {
+            width:100%;
+            position: relative;
+            left:0;
+            top:0;
+            font-family: 'Cabin Sketch', cursive;
+        }
+        #intro article{
+            width:600px;
+            height:300px;
+            text-align: center;
+            position: absolute;
+            left:50%;
+            top:50%;
+            margin:-150px 0 0 -300px;
+        }
+        #intro h2 {
+            font-size:33px;
+            margin:20px;
+        }
+        #intro p {
+            font-size:18px;
+            line-height:25px;
+        }
+
+        #copy article {
+            font-size:50px;
+            width:600px;
+            height:100px;
+            position: absolute;
+            left:50%;
+            top:50%;
+            margin:-50px 0 0 -300px;
+            text-align: center;
+        }
+        #main {
+            position: relative;
+            width:100%;
+            height:3000px;
+            background-image:url(img/iphone_square_large.jpg);
+            background-position: center;
+            background-size:cover;
+            background-repeat: no-repeat;
+        }
+        #footer {
+            width:100%;
+            height:200px;
+            text-align: center;
+            line-height:200px;
+            color:#424242;
+            background:#fff;
+            position: relative;
+            font-size:16px;
+        }
+    </style>
+</head>
+<body>
+    <section id="header" class="">
+        <h1><i class="fa fa-apple"></i></h1>
+        <nav id="gnb">
+            <h2 class="screen_out">주요메뉴</h2>
+            <ul>
+                <li><a href="">Mac</a></li>
+                <li><a href="">iPhone</a></li>
+                <li><a href="">iPad</a></li>
+                <li><a href="">Watch</a></li>
+            </ul>
+        </nav>
+    </section>
+    <section id="videoBox" class="section">
+        <video autoplay loop src="http://images.apple.com/media/us/music/2015/758e7234_576d_4c94_8dc0_54994631d0fb/overview/hero.mp4"></video>
+    </section>
+    <section id="copy" class="section">
+        <article>
+            Free, three-month trial of<br/>
+            Apple Music now available.
+        </article>
+    </section>
+    <section id="intro" class="section">
+        <article>
+            <h2>
+                All the ways you love music.<br/>
+                All in one place.
+            </h2>
+            <p>
+                We are profoundly passionate about music. It’s a force that’s driven and inspired us from day one. So we’ve set out to make it better. To bring you more music than ever with access to over 30 million songs. To give you personal recommendations from people who know and love music. To deepen the connection between artists and fans. To reimagine radio with a 24/7, global station.
+                This is Apple Music. And it’s just the beginning.
+            </p>
+        </article>
+    </section>
+    <main id="main">
+    </main>
+    <aside id="footer">
+        &copy;2016 jna.com
+    </aside>
+    <div id="loader"></div>
+    <script src="js/jquery.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+
+    var $loader = $("#loader"),
+            $logo =$("h1"),
+            $gnb = $("#gnb"),
+        $window = $(window),
+            $copy = $("#copy"),
+            $intro = $("#intro"),
+            $main = $("#main"),
+            wHeight =$window.height(),
+            $header = $("#header"),
+            mainTop = 0;
+
+    $window.scroll(function() {
+       var sTop = $window.scrollTop();
+
+        var rate = wHeight /2 ;
+
+       var cOp = (rate - sTop) / rate;
+
+        $copy.css("opacity",cOp);
+
+        var iOp = 0;
+
+        if(sTop>rate/2 && sTop<=wHeight) {
+            iOp = (sTop-rate)/500;
+        }else if(sTop>=wHeight) {
+
+            iOp = ((wHeight+rate)-(sTop))/rate;
+            console.log(iOp);
+        }
+
+        $intro.css("opacity",iOp);
+
+        if(mainTop<=sTop) {
+            $header.addClass("main");
+        }else {
+            $header.removeClass("main");
+        }
+
+    });
+
+    WebFont.load({
+        google: {
+            families: ['Cabin Sketch:400,700','Lato:100']
+        },loading:function(){
+            var wWidth = $window.width();
+            $logo.css("left",(wWidth-60)/2);
+            $gnb.css("right",(wWidth-320)/2);
+            $(".section").height(wHeight);
+            mainTop = $main.offset().top;
+         },
+        fontactive:function() {
+
+            $header.addClass("ani");
+
+            $loader.hide();
+        }
+    });
+
+</script>
+</body>
+</html>

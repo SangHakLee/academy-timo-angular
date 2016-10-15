@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<title>무한스크롤</title>
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/font-awesome.min.css" />
+		<style>
+		@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+		
+			html {
+				overflow-y:0;
+			}
+			:-moz-any-link:focus {
+			  outline: none;
+			}
+			body {
+				font:14px "Nanum Gothic","돋움","dotum",sans-serif;
+			}
+			h1 {
+				height:100px;
+				font-size:40px;
+				text-align: center;	
+				margin:10px;
+				line-height: 100px;
+				font-weight:bold;
+			}
+			
+			#wrap {
+				width:1000px;
+				margin:auto;
+				position: relative;
+				border:1px solid #333;
+			}
+			
+			#replyListBox {
+				padding:15px 0;
+			}
+			
+			#replyListBox ul {
+				border-top:1px solid #666;
+			}
+			
+			#replyListBox li {
+				padding:10px;
+				min-height:100px;
+				border-bottom:2px dotted #bbb;
+				overflow: hidden;
+				position: relative;
+			}
+			
+			#replyListBox .profile_box{
+				width:102px;
+				height:155px;
+				float: left;
+				position: relative;
+				text-align:center;
+			}
+			
+			#replyListBox .profile_box>em {
+				margin-top:10px;
+				text-align:center;
+				font-weight:bold;
+				font-size:21px;
+				color:#666666;
+			}
+			
+			#replyListBox .profile_box>img {
+				width:100px;
+				height:100px;
+				border-radius:51px;
+				border:1px solid #606060;
+			}
+			
+			#replyListBox .reply_box {
+				width:850px;
+				min-height:100px;
+				float:left;
+				/* 포지셔닝 컨텍스트 지정 */
+				position: relative;
+				padding-left:20px;
+				padding-top:50px;
+			}
+			
+			
+			#replyListBox .delete {
+				padding:6px 10px;
+				font-size:19px;
+				font-weight:bold;
+				border-radius:30px;
+				position: absolute;
+				top:0;
+				right:0;
+				background:#aaa;
+				color:#fff;
+				text-decoration: none;
+			}
+			
+			#replyListBox .delete:hover {
+				background:#333;
+			}
+			
+			#replyListBox .reply {
+				width:760px;
+				min-height:70px;
+				background:#ddd;
+				border-radius:0 12px 12px 12px;
+				padding:10px;
+				position: relative;
+				color:#000;
+				white-space:pre-wrap;
+				/* 단어를 브레이크 */
+				word-wrap:break-word;
+			}
+			
+			#replyListBox .time {
+				color:#444;
+				position: absolute;
+				font-size:15px;
+				bottom:0;	
+				left:0;
+				width:100px;
+				text-align: center;
+			}
+			
+			#replyListBox .reply::before {
+				content:"";
+				display:block;
+				position:absolute;
+				left:-10px;
+				top:0;
+				width:0;
+				height:0;
+				border-bottom:10px solid transparent;
+				border-right:10px solid #ddd;
+			}
+			
+			#replyListBox h2 {
+				
+				font-size:30px;
+				
+				font-weight:500;
+				text-align: center;
+				margin-bottom:10px;
+			}
+			
+			#loading {
+				width:100%;
+				height:100%;
+				position: fixed;
+				left:0;
+				top:0;
+				background:url(img/loader.gif) no-repeat center;
+				display: none;
+				background-color:rgba(0,0,0,.6);
+			}
+			
+			#topBtn {
+				width:30px;
+				height:30px;
+				position: fixed;
+				bottom:80px;
+				display: none;
+			}
+			
+			#topBtn>a {
+				background:url(img/img_btn_top.png);
+				width:30px;
+				height:30px;
+				display: block;
+				text-indent: -1000px;
+				overflow: hidden;
+				border-radius:15px;
+				box-shadow:0 1px 2px #aaa;
+				opacity: .8;
+				transition:.1s ease;
+			}
+			#topBtn>a:hover {
+				opacity:1;
+				box-shadow:0 0px 2px #000;
+			}
+			
+			.btn {
+	border:0;
+	margin:0;
+	padding:8px 14px;
+	background:#666;
+	color:#fff;
+	text-decoration: none;
+	font-weight: 300;
+}
+
+button.btn {
+	cursor: pointer;
+	font:300 17px 'NanumBarunGothic',sans-serif;
+}
+
+
+.btn:hover {
+	background:#333;
+	box-shadow:0 0 2px #333;
+}
+
+/* firefox가 가진 버튼의 크기를 없애줌 */
+button::-moz-focus-inner {
+    padding: 0;
+    border: 0
+}		
+</style>
+	</head>
+	<body>
+		<div id="wrap">
+		<h1>무한 스크롤</h1>
+		<div id="replyListBox">
+		<ul>
+			<li>
+				<div class="profile_box">
+					<img src="img/011.gif" />
+					<em class="writer">글쓴이</em>
+					<span class="time">3분전</span>
+				</div>
+				<div class="reply_box">
+					<div class="reply">글을 씁니다.</div>
+					<button class="delete btn" title="삭제">
+						<i class="fa fa-times"></i><span class="screen_out">삭제</span>
+					</button>
+				</div>
+			</li>
+			<li>
+				<div class="profile_box">
+					<img src="img/011.gif" />
+					<em class="writer">글쓴이</em>
+					<span class="time">3분전</span>
+				</div>
+				<div class="reply_box">
+					<div class="reply">글을 씁니다.</div>
+					<button class="delete btn" title="삭제">
+						<i class="fa fa-times"></i><span class="screen_out">삭제</span>
+					</button>
+				</div>
+			</li>
+			<li>
+				<div class="profile_box">
+					<img src="img/011.gif" />
+					<em class="writer">글쓴이</em>
+					<span class="time">3분전</span>
+				</div>
+				<div class="reply_box">
+					<div class="reply">글을 씁니다.</div>
+					<button class="delete btn" title="삭제">
+						<i class="fa fa-times"></i><span class="screen_out">삭제</span>
+					</button>
+				</div>
+			</li>
+			<li>
+				<div class="profile_box">
+					<img src="img/011.gif" />
+					<em class="writer">글쓴이</em>
+					<span class="time">3분전</span>
+				</div>
+				<div class="reply_box">
+					<div class="reply">글을 씁니다.</div>
+					<button class="delete btn" title="삭제">
+						<i class="fa fa-times"></i><span class="screen_out">삭제</span>
+					</button>
+				</div>
+			</li>
+			<li>
+				<div class="profile_box">
+					<img src="img/011.gif" />
+					<em class="writer">글쓴이</em>
+					<span class="time">3분전</span>
+				</div>
+				<div class="reply_box">
+					<div class="reply">글을 씁니다.</div>
+					<button class="delete btn" title="삭제">
+						<i class="fa fa-times"></i><span class="screen_out">삭제</span>
+					</button>
+				</div>
+			</li>
+			<li>
+				<div class="profile_box">
+					<img src="img/011.gif" />
+					<em class="writer">글쓴이</em>
+					<span class="time">3분전</span>
+				</div>
+				<div class="reply_box">
+					<div class="reply">글을 씁니다.</div>
+					<button class="delete btn" title="삭제">
+						<i class="fa fa-times"></i><span class="screen_out">삭제</span>
+					</button>
+				</div>
+			</li>
+			<li>
+				<div class="profile_box">
+					<img src="img/011.gif" />
+					<em class="writer">글쓴이</em>
+					<span class="time">3분전</span>
+				</div>
+				<div class="reply_box">
+					<div class="reply">글을 씁니다.</div>
+					<button class="delete btn" title="삭제">
+						<i class="fa fa-times"></i><span class="screen_out">삭제</span>
+					</button>
+				</div>
+			</li>
+			<li>
+				<div class="profile_box">
+					<img src="img/011.gif" />
+					<em class="writer">글쓴이</em>
+					<span class="time">3분전</span>
+				</div>
+				<div class="reply_box">
+					<div class="reply">글을 씁니다.</div>
+					<button class="delete btn" title="삭제">
+						<i class="fa fa-times"></i><span class="screen_out">삭제</span>
+					</button>
+				</div>
+			</li>
+		</ul>
+		</div>
+		<div id="topBtn">
+			<a href="#wrap" title="제일 위로">위로</a>
+		</div>
+		</div>
+		<div id="loading"></div>
+		<script src="js/jquery.js"></script>
+		<!-- underscore.js 가져다놓기 -->
+		<script src="js/underscore.js"></script>
+		
+	</body>
+</html>

@@ -68,13 +68,22 @@
 
     </style>
 </head>
-<body>
-    <form>
+<body ng-controller="ctrl">
+    <form ng-submit="add()">
     <input placeholder="이름입력"/>
     </form>
-    <ul>
-        
+    <ul ng-repeat="item in list">
+        <li>{{item}}</li>
     </ul>
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-animate.min.js"></script>
 
+    <script>
+        var app = angular.module('animationApp', ['ngAnimate']);
+
+        app.controller('ctrl', ['$scope', function($scope){
+            $scope.list = ['A', 'B', 'C']
+        }]);
+    </script>
 </body>
 </html>

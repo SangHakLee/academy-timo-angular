@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+
+@font-face {
+    font-family:'Yoon Gothic';
+    font-style:normal;
+    font-weight:200;
+    src:url("../fonts/YoonGothic-720.woff") format("woff");
+}
+@font-face {
+    font-family:'Yoon Gothic';
+    font-style:normal;
+    font-weight:300;
+    src:url("../fonts/YoonGothic-720.woff") format("woff");
+}
+@font-face {
+    font-family:'Yoon Gothic';
+    font-style:normal;
+    font-weight:400;
+    src:url("../fonts/YoonGothic-750.woff") format("woff");
+}
+@font-face {
+    font-family:'Yoon Gothic';
+    font-style:normal;
+    font-weight:500;
+    src:url("../fonts/YoonGothic-750.woff") format("woff");
+}
+@font-face {
+    font-family:'Yoon Gothic';
+    font-style:normal;
+    font-weight:600;
+    src:url("../fonts/YoonGothic-774.woff") format("woff");
+}
+@font-face {
+    font-family:'Yoon Gothic';
+    font-style:normal;
+    font-weight:700;
+    src:url("../fonts/YoonGothic-774.woff") format("woff");
+}
+@font-face {
+    font-family:'Yoon Gothic';
+    font-style:normal;
+    font-weight:800;
+    src:url("../fonts/YoonGothic-790.woff") format("woff");
+}
+@font-face {
+    font-family:'Yoon Gothic';
+    font-style:normal;
+    font-weight:900;
+    src:url("../fonts/YoonGothic-790.woff") format("woff");
+}

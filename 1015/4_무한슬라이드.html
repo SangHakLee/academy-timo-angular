@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<title>이미지슬라이드</title>
+		<style>
+			body {
+				margin: 0;
+			}
+			#details {
+				width:620px;
+				margin:auto;
+				position: relative;
+			}
+			
+			#friends {
+				width:480px;
+				height:500px;
+				margin:auto;
+				position: relative;
+				overflow: hidden;
+			}
+			
+			#nextBtn,#prevBtn {
+				width:44px;
+				height:44px;
+				background:url(img/kakaofriends_btn.png);
+				text-indent: -1000px;
+				overflow: hidden;
+				cursor: pointer;
+				border:none;
+				position: absolute;
+				top:228px;
+			}
+			
+			#prevBtn {
+				background-position: 0 -347px;
+				left:0;
+			}
+			
+			#prevBtn:hover {
+				background-position: -61px -347px;
+			}
+			
+			#nextBtn {
+				background-position:0 -411px;
+				right:0;
+			}
+			#nextBtn:hover {
+				background-position: -61px -411px;
+			}
+            
+            #friends div {
+                width:480px;
+                height:500px;
+                position: absolute;
+                left:0;
+            }
+            #friend1 {
+               background: url(img/apeach.png); 
+            }
+            
+			
+			
+		</style>
+	</head>
+	<body>
+		<div id="details">
+			<div id="friends">
+				<div id="friend1"></div>
+                <div id="friend2" class="hide"></div>
+			</div><!-- //friends -->
+			<div id="btnBox">
+				<button id="prevBtn">이전친구보기</button>
+				<button id="nextBtn">다음친구보기</button>
+			</div><!-- //btnBox -->
+		</div><!-- //details -->
+		<script src="js/jquery.js"></script>
+		<script>
+			//이미지이름을 저장하는 배열
+			var imgs = ["apeach.png",
+						"frodo.png",
+						"jayg.png",
+						"muji.png",
+						"neo.png",
+                        "tube.png"
+			           ];
+			           
+			//이미지 index를 저장하는 변수
+			var index = 0;
+			
+			//작동을 한번만 할 수 있도록
+			//버튼 여러번 막기 위해서
+			var flag = true;//flag값이 true면
+			// 움직이는 애니메이션 작동
+			//false값이면 움직이지 않습니다.
+			
+				
+				//nextBtn을 눌렀을때
+				$("#prevBtn").click(function() {
+					
+					if(flag) {
+						//한번 클릭하면 바로 false로
+						//변경하여 오작동을 막습니다.
+						flag = false;
+					
+					if(index==imgs.length-1) {
+						//1증가후에 0이어야 하기 때문에
+						index = -1;
+					}
+					var url = "url(img/"+imgs[++index]+")";
+					
+					$(".hide").appendTo("#friends")
+					          .removeClass("hide")
+					          .css({left:480,background:url})
+					          .animate({left:0},300)
+					          .prev()
+					          .addClass("hide")
+					          .animate({left:-480},300,function() {
+					          	//애니메이션이 끝났기 때문에
+					          	//flag를 true로 변경하여
+					          	//작동할수 있도록
+					          	
+					          	flag = true;
+					          });
+
+					}
+					
+					//인덱스를 1증가시킵니다.
+					
+					//이미지이름을 얻어옵니다.
+					
+					//현재 숨겨져 있는 .hide요소에
+					//저 이미지를 집어넣고
+					//움직입니다.
+					//left값 이동 / 실제 마크업이동
+					
+					//다 되었으면 이제 애니메이션을
+					//시킵니다.
+					
+					//애니메이션이 완료된 후에
+					//hide클래스를 다른요소에 
+					//넣으면 됩니다.
+					
+					//now클래스도 제거하고
+					//index와 같은 요소(li)에
+					//입력합니다.
+					
+					
+				});//#nextBtn click end
+				
+				
+				
+				$("#nextBtn").click(function() {
+					
+					if(flag) {
+						//오작동 막기
+						flag = false;
+						
+						//만약 index가 0이면
+						if(index==0) {
+							index=imgs.length;
+						}
+						
+						//index감소
+						var url="url(img/"+ imgs[--index]+")";
+						
+						$(".hide").prependTo("#friends")
+						          .removeClass("hide")
+						          .css({left:-480,background:url})
+						          .animate({left:0},300)
+						          .next()
+						          .addClass("hide")
+						          .animate({left:480},300,function(){
+						          	flag = true;
+						          });
+						          
+						
+					}
+					
+				});//#prevBtn click end
+				
+			
+		</script>
+	</body>
+</html>
+
