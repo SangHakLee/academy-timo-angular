@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>text_html메서드</title>
+		<style type="text/css"> 
+			#text,#html {
+				width:250px;
+				height:100px;
+				border:1px solid #333;
+				margin-bottom:40px;
+			}
+		</style>
+	</head>
+	<body>
+		<p>
+			<button>입력!</button>
+		</p>
+		<div id="text"></div>
+		<div id="html"></div>
+	<script src="js/jquery.js"></script>
+	<script>
+		$("button").click(function () {
+
+			//문자열이 마크업일때
+			var txt = "<img src='img/k7.png'>";
+
+			$("#text").text(txt);//text()메서드
+
+			//문자열이 마크업일때 요소를 생성
+			$("#html").html(txt);//html()메서드
+
+		});//button click() end
+	</script>
+	</body>
+</html>

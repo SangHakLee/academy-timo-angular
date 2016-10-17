@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<title>Date_moment</title>
+		<style>
+			#time {
+				margin:70px;
+				text-align:center;
+				font-size:60px;
+				font-weight:bold;
+			}
+		</style>
+	</head>
+	<body>
+		<h1 id="time">2016년 10월 1일 11시 4분 22초</h1>
+		<script src="js/jquery.js"></script>
+		<!-- moment 라이브러리 -->
+		<script src="js/moment-with-locales.js"></script>
+		<script>
+
+			//원래 자바스크립트에는 내장객체로 Date가 있습니다.
+			//그런데 Date는 기능도 별로없고 불편합니다.
+
+//			var now = new Date();//현재 날짜(시분초등)
+//
+//			var year = now.getFullYear();//년도 얻기
+//			var month = now.getMonth()+1;//월
+//			var date = now.getDate();//일
+//			var hour = now.getHours();//시
+//			var min = now.getMinutes();//분
+//			var sec = now.getSeconds();//초
+//
+//			var fullDate = year+"년 " + month + "월 "+ date +"일 "
+//					      + hour+":" + min +":" +sec;
+
+			//한국으로 변경
+			moment.locale("ko");
+
+			var now = moment();
+
+			var fullDate = now.format("YYYY년 MM월 DD일 hh시 mm분 ss초");
+
+			$("#time").text(fullDate);
+
+		</script>
+	</body>
+</html>

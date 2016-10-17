@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+        <title>요소의 탐색</title>
+		<style type="text/css">
+			table {
+				border-collapse:collapse;
+				font:bold 50px Arial, Helvetica, sans-serif;
+				margin: auto;
+			}
+			
+			table td {
+				padding:20px 35px;
+			}
+		</style>
+    </head>
+    <body>
+    	<table border="1">
+    		<tbody>
+    			<tr>
+    				<td>1</td>
+					<td>2</td>
+					<td>3</td>
+    			</tr>
+				<tr>
+    				<td>4</td>
+					<td>5</td>
+					<td>6</td>
+    			</tr>
+				<tr>
+    				<td>7</td>
+					<td>8</td>
+					<td>9</td>
+    			</tr>
+    		</tbody>
+    	</table>
+	<script src="js/jquery.js"></script>
+	<script>
+
+		//요소의 탐색이란 DOM구조에서 원하는 요소까지 이동하고 찾는것
+		//next()
+		//prev()
+		//end()
+		//parent()
+		//parents(선택자)
+		//children()
+
+
+		$("td").eq(2)
+			   .css("background","#F44336")
+				.prev()//이전요소(2번 td)
+				.css("background","#E91E63")
+				.parent()//첫번째 tr
+				.next()//두번째 tr
+				.children() //5,6,7번 td
+				.eq(1)//5번 td
+				.css("background","#673AB7")
+				.parents("tbody")//tbody요소
+				.find("tr:eq(2)")//자손들중에 찾음
+				.children()//7,8,9번 td
+				.eq(0)
+				.css("background","#3F51B5");
+//7번 td를 선택후 #3F51B5
+
+
+	</script>
+    </body>
+</html>
+

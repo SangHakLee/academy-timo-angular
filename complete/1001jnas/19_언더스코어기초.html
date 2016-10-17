@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>언더스코어 기초</title>
+</head>
+<body>
+<h1>동물리스트</h1>
+<ul>
+
+</ul>
+    <!-- 언더스코어 템플릿 -->
+    <script type="text/template" id="liTmp">
+        <% $(animals).each(function(){  %>
+        <li><%=this%></li>
+        <% }) %>
+    </script>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/underscore.js"></script>
+    <script>
+
+        /*
+            jquery는 DOM,animation,Aajx의 장점
+            moment는 날짜,시간 장점
+            underscore는 컬렉션기능, 템플릿
+
+         */
+
+        // _ <---  언더스코어
+
+       // alert();
+
+        var tmp = _.template($("#liTmp").html());
+
+        var markup = tmp({"animals":["사자","호랑이","고양이","강아지"]});
+
+        $("ul").append(markup);
+
+
+    </script>
+</body>
+</html>

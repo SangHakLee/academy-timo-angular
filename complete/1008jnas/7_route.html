@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html ng-app="routeApp">
+<head>
+<meta charset="UTF-8">
+<title>라우터 파라미터</title>
+<link rel="stylesheet" href="css/kakao.font.css"/>
+<link rel="stylesheet" href="css/font-awesome.min.css" />
+<style>
+	body {
+	margin:0;
+		font:100 18px 'Kakao',sans-serif;
+	}
+	#wrap {
+	width:1000px;margin:auto;
+		box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+	}
+	
+	#header {
+	width:980px;
+	background:#03A9F4;
+	border-top:1px solid #aaa;
+		padding:10px;
+		color:#fff;
+	}
+	
+	#header ul {
+		margin:0;
+		padding:0;
+		list-style: none;
+		overflow: hidden;
+	}
+	
+	#header li {
+		float:left;
+		padding:5px 10px;
+	}
+	#header a {
+		color:#fff;
+	}
+	#content {
+		padding: 10px;
+		min-height:500px;
+	}
+	#content a {
+		color:#03A9F4;
+	}
+	#footer {
+	height:100px;
+	line-height:100px;
+	text-align:center;
+        background: #03A9F4;
+		color:#fff;}
+	
+</style>
+</head>
+<body>
+	<div id="wrap">
+		<div id="header">
+			<h1><i class="fa fa-youtube-play"></i> 멋진영화사이트</h1>
+			<ul>
+				<li><a href="#movie">영화목록</a>
+				<li><a href="#add">영화등록</a>
+				<li><a href="#mypage">마이페이지</a>
+			</ul>
+		</div>
+		<div id="content">
+			<!-- ng-view의 디렉티브 안에 view들이 변경 -->
+			<ng-view></ng-view>
+		</div>
+		<div id="footer">&copy; 2016 jna.com</div>
+	</div>
+<script src="js/angular.min.js"></script>
+<!-- router를 사용하려면 route를 import -->
+<script src="js/angular-route.min.js"></script>
+<!-- i18n -->
+<script src="js/angular-locale_ko.js"></script>
+<script>
+
+	var app = angular.module("routeApp",["ngRoute"]);
+
+	//정적인 데이터를 설정하려면 value로
+	app.value("movies",[
+		{"no":0,"poster":"poster1.png","director":"팀 버튼","name":"미스 페레그린과 이상한 아이들의 집","likes":55,"dislikes":32,"price":18000, "release":"2016-09-28"},
+		{"no":1,"poster":"poster2.png","director":"페데 알바레즈","name":"맨 인 더 다크","likes":16,"dislikes":12,"price":15000, "release":"2016-10-05"},
+		{"no":2,"poster":"poster3.png","director":"김성수","name":"아수라","likes":106,"dislikes":12,"price":21000, "release":"2016-09-28"},
+		{"no":3,"poster":"poster4.png","director":"샤론 맥과이어","name":"브리짓 존스의 베이비","likes":106,"dislikes":12,"price":12000, "release":"2016-09-28"},
+		{"no":4,"poster":"poster5.png","director":"김지운","name":"밀 정","likes":106,"dislikes":12,"price":17000, "release":"2016-09-07"},
+		{"no":5,"poster":"poster6.png","director":"클린트 이스트우드","name":"설리: 허드슨강의 기적","likes":106,"dislikes":12,"price":22000, "release":"2016-09-28"}
+	]);
+
+	//동적인 데이터(객체)를 설정하려면 factory, service
+
+
+	// 주소와 view와 controller 설정
+	app.config(function($routeProvider) {
+
+		//$routeProvider.when("주소",옵션객체);
+
+		$routeProvider.when("/mypage",{
+			"templateUrl":"view/mypage.html"
+		});
+
+		$routeProvider.when("/add",{
+			"templateUrl":"view/insertForm.html"
+		});
+
+		$routeProvider.when("/movie",{
+			"templateUrl":"view/list.html",
+			"controller":"listCtrl"
+		});
+
+		$routeProvider.when("/movie/:no",{//:no  <-- $routeParams
+			templateUrl:"view/detail.html",
+			controller:"detailCtrl"
+		});
+
+		//when이 아닌 나머지 주소의 경우 이동
+		$routeProvider.otherwise({"redirectTo":"/movie"});
+
+	});
+
+	app.controller("detailCtrl",["$scope","movies","$routeParams",
+		function ($scope,movies,$routeParams) {
+
+		alert($routeParams.no);
+
+		$scope.movie = movies[$routeParams.no];
+
+	}]);//detailCtrl() end
+
+
+	app.controller("listCtrl",["$scope","movies",function ($scope,movies) {
+		$scope.movies = movies;
+	}]);//listCtrl() end
+
+
+</script>
+</body>
+</html>

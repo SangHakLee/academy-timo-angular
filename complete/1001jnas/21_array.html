@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>순수자바스크립트배열의 메서드</title>
+</head>
+<body>
+<script>
+
+    var names = ["정우성","조정석","황정민","박보검"];
+
+    //자바스크립트 배열의 메서드
+    //1) push() : 마지막요소로 추가
+    //2) pop() : 마지막요소를 제거
+    //3) shift() : 첫번째요소를 제거
+    //4) unshift() : 첫번째요소를 추가
+    //5) splice()  : 중간을 지우거나 추가
+
+    names.pop();//정우성,조정석,황정민
+    names.push("주지훈");//정우성,조정석,황정민,주지훈
+    names.shift();//조정석,황정민,주지훈
+    names.unshift("공유");//공유,조정석,황정민,주지훈
+    names.splice(2,2);//2번지에서 1개를 지움  공유,조정석
+    names.splice(1,0,"송강호");//1번지에 송강호를 추가 : 공유,송강호,조정석
+
+    alert(names);
+
+</script>
+</body>
+</html>

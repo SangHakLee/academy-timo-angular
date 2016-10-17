@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>우리가 클릭한 요소와 인덱스 얻기</title>
+</head>
+<body>
+    <button>버튼</button>
+    <button>버튼</button>
+    <button>버튼</button>
+
+<script src="js/jquery.js"></script>
+<script>
+    $("button").click(function() {
+        // this라는 키워드 : 우리가 클릭한 그 요소
+        //this는 순수자바스크립트 요소객체
+        //그래서 click,css,addClass,text....다 못씀
+        //this.style.color="red";
+
+        //그러면 css등 jquery를 API를 사용하려면
+        //순수자바스크립트요소객체를 jquery객체로 변경해야 합니다
+        $(this).css("color","red");
+
+        //우리가 클릭한 그 요소의 인덱스얻기
+        var idx = $(this).index();
+
+        alert(idx);
+
+       //$("button").css("color","red");
+    });//button click() end
+</script>
+</body>
+</html>

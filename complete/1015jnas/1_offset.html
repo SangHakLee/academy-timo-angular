@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>offset과 position</title>
+    <style>
+        #box {
+            width:600px;
+            height:400px;
+            position: fixed;
+            left:50%;
+            top:50%;
+            margin:-200px 0 0 -300px;
+            background:#888;
+        }
+        #child {
+            width:200px;
+            height:200px;
+            position: relative;
+            left:200px;
+            top:100px;
+            background: #00bfff;
+            cursor: pointer;
+            box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div id="child"></div>
+</div>
+<!-- jquery import -->
+<script src="js/jquery.js"></script>
+<script>
+
+    $("#child").on("click",function () {
+
+        //특정요소의 포지션 얻는 방법
+        //1) 브라우저 기준 : offset()
+        //2) 포지셔닝 컨텍스트 : postition()
+        //리턴자료형 : 객체(left,top속성)
+
+        var offset = $("#child").offset();
+        var position = $("#child").position();
+
+        var msg = "오프셋left:"+offset.left+
+                  "/오프셋top:"+offset.top+
+                  "<br/>포지션left:"+position.left+
+                  "/"+"포지션top:"+position.top;
+
+        $("#child").html(msg);
+
+    });//#child click() end
+
+</script>
+</body>
+</html>

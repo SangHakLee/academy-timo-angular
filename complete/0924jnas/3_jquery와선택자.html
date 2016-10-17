@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<title>CSS의 선택자의 활용</title>
+		<link rel="stylesheet" href="css/reset.css" />
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/notosanskr.css" />
+		<style>
+			
+			body {
+				font-family:'Noto Sans KR',sans-serif;
+				margin:0;
+			}
+			
+			#wrap {
+				width:1000px;
+				border:1px solid #333;
+				margin:auto;
+				box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+			}
+			
+			#header {
+				width:1000px;
+				height:99px;
+				border-bottom:1px solid #333;
+				position: relative;
+				text-align: center;
+				line-height:99px;
+			}
+			
+			button {
+				padding:12px 16px;
+				border:none;
+				cursor: pointer;
+				font:700 20px 'Noto Sans KR',sans-serif;
+				background: #26C6DA;
+				color:#fff;
+			}
+			button:hover {
+				background: #00B8D4;
+				box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+				transition: .2s ease;
+			}	
+			button:active {
+				background: #00ACC1;
+				transform:scale(.8);
+			}
+			
+			#content ul {
+				margin:20px auto;
+				padding:0;
+				list-style: none;
+				width:960px;
+			}
+			
+			#content ul:after {
+				content:"";
+				clear: both;
+				display: block;
+			}
+
+			#content li {
+				width:278px;
+				height:200px;
+				margin:20px;
+				float: left;
+				font-size:100px;
+				text-align: center;
+				line-height: 200px;
+				border:1px solid #333;
+				font-weight: 700;
+				transition:.5s ease;
+			}
+
+			/*li:nth-child(5) {*/
+				/*color:red;*/
+			/*}*/
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<header id="header">
+				<button><i class="fa fa-instagram"></i> 색상 변경</button>
+			</header><!-- //header -->
+			<div id="content">
+				<ul>
+					<li>1</li>
+					<li>2</li>
+					<li>3</li>
+					<li>4</li>
+					<li>5</li>
+					<li>6</li>
+					<li>7</li>
+					<li>8</li>
+					<li>9</li>
+				</ul>
+			</div><!-- //content -->
+		</div><!-- //wrap -->
+	<!-- 1) jquery를 import -->
+	<script src="js/jquery.js"></script>
+	<!-- 우리가 작성하는 코드 -->
+	<script>
+
+		//1) #header안에 있는 button요소를 선택하고
+		//2) click이벤트리스너를 붙입니다.
+		$('#header>button').click(function () {
+
+			//3) 1번 li를 선택하고(css3선택자)
+			//4) 글자색변경
+			$("li:first-child").css("color","#EF9A9A");
+
+			//5) jquery만의 선택자 이용하여 선택
+			$("li:first").css("background","#F44336");
+			//6) 뒷배경색 변경
+
+			//7) 3번 li를 선택하고(css3) 글자색 변경
+			$("li:nth-child(3)").css("color","#CE93D8");
+			//8) jquery선택자 이용하여 선택하고 뒷배경 변경
+			//eq는 0부터 시작합니다.(프로그래밍은 0부터)
+			$("li:eq(2)").css("background","url(img/k7.png)");
+
+			//7번 li
+			$("li:nth-child(7)").css("color","#9FA8DA");
+			$("li:eq(6)").css("background","#3F51B5");
+			//마지막
+			$("li:last-child").css("color","#A5D6A7");
+			$("li:last").css("background","#4CAF50");
+
+		});//click() end
+
+
+		
+	</script>
+	</body>
+</html>
+
+
+
+

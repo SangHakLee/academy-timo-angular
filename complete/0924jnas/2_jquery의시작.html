@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>jquery의 시작</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/notosanskr.css" />
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            text-align: center;
+        }
+        
+        #txt {
+            font-size: 50px;
+            font-weight: 700;
+            transition: .4s ease;
+            width: 400px;
+            margin: 30px auto;
+            color:#424242;
+            transform:scale(1) rotate(0deg);
+        }
+
+        /* css를 클래스로 적용 */
+        #txt.emphasis {
+            color:deeppink;
+            transform:scale(2) rotate(734deg);
+        }
+        
+        #btn {
+            padding: 12px 16px;
+            border: none;
+            cursor: pointer;
+            font: 500 20px 'Noto Sans KR', sans-serif;
+            background: #26C6DA;
+            color: #fff;
+        }
+        
+        #btn:hover {
+            background: #00B8D4;
+            box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+            transition: .2s ease;
+        }
+
+    </style>
+</head>
+<body>
+    <h1 id="txt">버튼을 눌러보세요.</h1>
+    <button id="btn">난 버튼</button>
+    <!-- jquery import -->
+    <script src="js/jquery.js"></script>
+    <!-- 우리가 작성하는 코드 -->
+   <script>
+
+
+
+       //1) id가 btn인 button요소를 선택하고
+       //2) click이벤트(리스너)를 붙입니다.
+       $("#btn").click(function () {
+           //alert("zzz");
+
+           //3) id가 txt인 h1요소를 선택하고
+           //4) 글자를 '눌렀군요'로 변경하고
+           //5) emphasis라는 클래스를 줍니다.
+           $("#txt").text("눌렀군요.").toggleClass("emphasis");
+
+       });//click() end
+
+
+        //jquery는 $만 기억하면 됩니다.
+
+       //jQuery();  <--- 축약형 :  $()
+
+       /*
+        jquery의 장점
+
+        1) 자바스크립트 사용시 편리함을 위해서 사용
+        2) 요소선택이 쉬움
+
+        */
+   </script>
+</body>
+</html>

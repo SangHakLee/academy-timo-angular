@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>jquery</title>
+    <link rel="stylesheet" href="css/kakao.font.css"/>
+    <style>
+        body {
+            font-family: 'Kakao', sans-serif;
+
+        }
+
+        h2, h3 {
+            font-weight: 200;
+        }
+
+        input {
+            font-family: 'Kakao', sans-serif;
+            font-size: 22px;
+        }
+    </style>
+</head>
+<body>
+<h1>jQuery를 이용해봅시다.</h1>
+<div id="txtBox">
+    <input type="text"/>
+    <h2>안녕하세요?</h2>
+    <h3>여기도</h3>
+</div>
+<script src="js/jquery.js"></script>
+<script>
+    //input요소에 keyup이벤트리스너를 붙임
+    $("input").keyup(function () {
+
+        //input요소의 글자를 얻어옵니다.
+        var value = $("input").val();
+
+        //h2요소 선택후 값 세팅
+        $("h2").text(value);
+        //h3요소 선택후 값 세팅
+        $("h3").text(value);
+
+    });//keypu() end
+</script>
+</body>
+</html>

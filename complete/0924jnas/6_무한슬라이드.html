@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<title>이미지슬라이드</title>
+		<style>
+			body {
+				margin: 0;
+			}
+			#details {
+				width:620px;
+				margin:auto;
+				position: relative;
+			}
+			
+			#friends {
+				width:480px;
+				height:500px;
+				margin:auto;
+				position: relative;
+				overflow: hidden;
+			}
+			
+			#nextBtn,#prevBtn {
+				width:44px;
+				height:44px;
+				background:url(img/kakaofriends_btn.png);
+				text-indent: -1000px;
+				overflow: hidden;
+				cursor: pointer;
+				border:none;
+				position: absolute;
+				top:228px;
+			}
+			
+			#prevBtn {
+				background-position: 0 -347px;
+				left:0;
+			}
+			
+			#prevBtn:hover {
+				background-position: -61px -347px;
+			}
+			
+			#nextBtn {
+				background-position:0 -411px;
+				right:0;
+			}
+			#nextBtn:hover {
+				background-position: -61px -411px;
+			}
+            
+            #friends div {
+                width:480px;
+                height:500px;
+                position: absolute;
+                left:0;
+            }
+            #friend1 {
+               background: url(img/apeach.png); 
+            }
+			
+		</style>
+	</head>
+	<body>
+		<div id="details">
+			<div id="friends">
+				<div id="friend1"></div>
+                <div id="friend2" class="hide"></div>
+			</div><!-- //friends -->
+			<div id="btnBox">
+				<button id="prevBtn">이전친구보기</button>
+				<button id="nextBtn">다음친구보기</button>
+			</div><!-- //btnBox -->
+		</div><!-- //details -->
+		
+	</body>
+</html>
+

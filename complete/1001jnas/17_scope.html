@@ -1,0 +1,36 @@
+<!doctype html>
+<html ng-app="scopeApp">
+<head>
+    <meta charset="UTF-8">
+    <title>스코프의 이해</title>
+</head>
+<body>
+<div id="box" ng-controller="parentCtrl">
+    <h1>이름 : {{name}} / 감독 : {{director}}</h1>
+    <ul ng-controller="childCtrl">
+        <li>이름 : {{name}} / 감독 : {{director}}</li>
+    </ul>
+</div>
+<div id="another" ng-controller="anotherCtrl">
+    <h2>이름 : {{name}} / 감독 : {{director}}</h2>
+</div>
+<script src="js/angular.min.js"></script>
+<script>
+
+    var app = angular.module("scopeApp",[]);
+
+    app.controller("parentCtrl",["$scope",function($scope){
+        $scope.name ="아수라";
+    }]);
+    app.controller("childCtrl",["$scope",function($scope){
+        $scope.name="밀정";
+        $scope.director="김지운";
+    }]);
+    app.controller("anotherCtrl",["$scope",function($scope){
+
+    }]);
+
+
+</script>
+</body>
+</html>

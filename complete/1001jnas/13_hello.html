@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html ng-app="helloApp">
+<head>
+<meta charset="UTF-8">
+<title>Hello Angular.js</title>
+<link rel="stylesheet" href="css/kakao.font.css"/>
+<style>
+	body {
+		font-family: 'Kakao', sans-serif;
+        
+	}
+    h1,h2 {
+        font-weight: 200;
+    }
+	input {
+		font-family: 'Kakao', sans-serif;
+		font-size:22px;
+	}
+</style>
+</head>
+<body ng-controller="ctrl">
+<h1>Angular를 이용해봅시다.^-^</h1>
+<input type="text" ng-model="txt"/>
+<h2>{{txt}}</h2><!-- angular의문법 : view에서 모델을 출력하려면 {{}} -->
+<h3>{{txt}}</h3>
+<!-- angular import -->
+<script src="js/angular.min.js"></script>
+<script>
+
+ var app = angular.module("helloApp",[]);
+
+ //컨트롤러 설정
+ app.controller("ctrl",["$scope",function ($scope) {
+  //$scope : 모델
+
+
+ }]);
+
+
+
+
+/*
+      MVC 패턴
+
+      - M(Model) : 데이터 그 자체
+      - V(View) : 유저와 만나는 인터페이스(모델을 출력, 이벤트처리)
+      - C(Controller) : 모델과 뷰와 컨트롤
+
+ */
+
+
+
+</script>
+<!--
+
+
+ jquery,moment,underscoe는 라이브러리
+ angular는 프레임워크
+
+ 프로그래밍의 흐름주체가 '개발자'면 라이브러리
+ 아니면 프레임워크
+
+-->
+
+    
+ </body>
+ </html>
+ 
+ 
+ 
+ 
+ 

@@ -1,0 +1,85 @@
+<!doctype html>
+<html ng-app="boxOfficeApp">
+  <head>
+  	<meta charset="UTF-8" />
+  	<title>Movie BoxOffice</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/main.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/kakao.font.css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <style>
+      .title {
+        white-space:nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="container">
+        <h1>영화 목록</h1>
+      </div>
+    </div>
+    <div class="main" ng-controller="ctrl">
+      <div class="container">
+        <h2>박스오피스</h2>
+  <ul>
+      <li class="col-md-4" ng-repeat="movie in movies">
+        <div class="thumbnail">
+          <img src="poster/{{movie.poster}}" />
+          <!--<h3 class="title">{{movie.name}}</h3>-->
+          <h3 class="title" ng-bind="movie.name"></h3>
+          <time class="date" ng-bind="movie.release|date:'yyyy년 M월 d일'"></time>
+          <strong class="price">{{movie.price|currency:undefined:0}}</strong>
+          <div class="rating">
+            <button class="likes" ng-click="increaseLike(movie)"><i class="fa fa-thumbs-up"></i>{{movie.likes}}</button>
+            <button class="dislikes" ng-click="increaseDislike(movies,$index)"><i class="fa fa-thumbs-down"></i>{{movie.dislikes}}</button>
+          </div><!--//rating-->
+        </div><!--//thumbnail-->
+      </li>
+  </ul> 
+      </div>
+    </div><!-- movieController -->
+    <div class="footer">
+      <div class="container">
+        <h2>&copy; 2016 jna</h2>
+      </div>
+    </div>
+<!-- angular import -->
+  <script src="js/angular.min.js"></script>
+  <!-- i18n 국제화 처리 -->
+  <script src="js/angular-locale_ko.js"></script>
+  <script>
+    var app = angular.module("boxOfficeApp",[]);
+
+    app.controller("ctrl",["$http","$scope",function($http,$scope){
+
+      $scope.increaseLike = function(movie) {
+        //그 영화객체의 likes속성의 값을 1증가
+        movie.likes++;
+
+      }//increaseLike() end
+
+      $scope.increaseDislike = function(movies,$index) {
+
+        movies[$index].dislikes++;
+
+      }//increaseDislike() end
+
+      var promise = $http({url:"ajax/movies.json"});
+
+      promise.error(function(){
+        alert("에러");
+      });//error콜백
+      promise.success(function(json){
+        //$scope에 모델로 등록
+        $scope.movies = json;
+
+      });//success콜백
+
+    }]);
+
+  </script>
+  </body>
+</html>

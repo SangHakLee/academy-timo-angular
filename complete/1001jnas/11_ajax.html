@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>ajax</title>
+		<style>
+			#loader {
+				width:100%;
+				height:100%;
+				background-color:#EDE9DF;
+				position: fixed;
+				left:0;
+				top:0;
+				background-image:url(img/loader.gif);
+				background-repeat: no-repeat;
+				background-position: center;
+				/*
+				 * 기본으로 숨겼다가
+				 */
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<button>요청!</button>
+		<h1>남자배우 목록</h1>
+		<table border="1">
+			<caption>남자배우목록</caption>
+			<thead>
+				<tr>
+					<th>이름</th>
+					<th>키</th>
+					<th>몸무게</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td colspan="3">없습니다.</td>
+				</tr>
+			</tbody>
+		</table>	
+<div id="loader"></div>
+
+
+<script src="js/jquery.js"></script>
+<script>
+
+	//ajax는 요청,응답이 맞습니다.
+	//XMLHTTPRequest객체가 요청과 응답을 합니다.
+
+
+	$("button").click(function() {
+
+		//1) loader를 보여줌
+		$("#loader").show();
+
+		//2) ajax
+		//$.ajax("주소",옵션객체)
+		//주요옵션 :
+		// - dataType : json,xml,text,html,jsonp...
+		// - type : GET,POST,PUT,DELETE
+		// - data : 서버로 넘길 파라미터(데이터)
+		// - error : 에러시 호출되는 함수
+		// - success: 성공시 호출되는 함수
+
+		$.ajax("ajax/actors.json",{
+			type:"GET",
+			dataType:"json",
+			error:function(xhr,error,code){
+				//xhr : XMLHTTPRequest객체 그 자체,
+				//error : 에러
+				//code : 에러코드
+				alert(code);
+			},
+			success:function(json){
+
+				//기존의 tr들을 전부 지움
+				$("tbody").empty();
+
+				//json : 서버에서 넘어온 데이터(json객체)
+				$(json).each(function() {
+					//this가 그 객체
+
+					//tr생성
+					var $tr = $("<tr>");
+					var $td1 = $("<td>").text(this.name);
+					var $td2 = $("<td>").text(this.height);
+					var $td3 = $("<td>").text(this.weight);
+
+					$tr.append($td1,$td2,$td3)
+							.appendTo("tbody");
+
+				});//each() end
+
+				//로딩이미지 숨김
+				$("#loader").fadeOut(200);
+
+			}//success function() end
+
+		});//$.ajax() end
+
+
+	})//button click() end
+
+
+</script>
+</body>
+</html>
+
+
+
+
+

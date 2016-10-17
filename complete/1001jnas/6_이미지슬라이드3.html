@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<title>이미지슬라이드</title>
+		<style>
+			body {
+				margin: 0;
+			}
+			#details {
+				width:620px;
+				margin:auto;
+				position: relative;
+			}
+			
+			#friends {
+				width:480px;
+				height:500px;
+				margin:auto;
+				position: relative;
+				overflow: hidden;
+			}
+			
+			#nextBtn,#prevBtn {
+				width:44px;
+				height:44px;
+				background:url(img/kakaofriends_btn.png);
+				text-indent: -1000px;
+				overflow: hidden;
+				cursor: pointer;
+				border:none;
+				position: absolute;
+				top:228px;
+			}
+			
+			#prevBtn {
+				background-position: 0 -347px;
+				left:0;
+				/*
+				 * 처음에는 숨김
+				 */
+				display: none;
+			}
+			
+			#prevBtn:hover {
+				background-position: -61px -347px;
+			}
+			
+			#nextBtn {
+				background-position:0 -411px;
+				right:0;
+			}
+			#nextBtn:hover {
+				background-position: -61px -411px;
+			}
+			
+			#imgBox {
+				width:2880px;/* 480 x 6 */
+				overflow: hidden;
+				position:absolute;
+				left:0;
+				transition: .4s cubic-bezier(.67,.15,.52,1.52);
+			}
+			
+			#imgBox img {
+				float:left; 
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="details">
+			<div id="friends">
+				<div id="imgBox">
+					<img src="img/muji.png" alt="무지&amp;콘" />
+					<img src="img/apeach.png" alt="어피치"/>
+					<img src="img/jayg.png" alt="제이지"/>
+					<img src="img/frodo.png" alt="프로도"/>
+					<img src="img/neo.png" alt="네오"/>
+					<img src="img/tube.png" alt="튜브"/>
+				</div><!-- //imgBox -->
+			</div><!-- //friends -->
+			<div id="btnBox">
+				<button id="prevBtn">이전친구보기</button>
+				<button id="nextBtn">다음친구보기</button>
+			</div><!-- //btnBox -->
+		</div><!-- //details -->
+		<script src="js/jquery.js"></script>
+		<script>
+			
+			var $imgBox = $("#imgBox"),
+			    idx = 0,
+			    $nextBtn = $("#nextBtn"),
+			    $prevBtn = $("#prevBtn");
+			
+		$nextBtn.click(function(){
+			
+			++idx;
+			handleSlide();
+			
+		
+		});//nextBtn click end
+		
+		$prevBtn.click(function(){
+		
+			--idx;
+			handleSlide();
+		
+		});//prevBtn click end
+			
+		
+		//버튼을 보이게 하고 imgs를
+		//움직이게 하는 함수
+		function handleSlide() {
+			//nextBtn에 대한 처리
+			if(idx==5){
+				$nextBtn.hide();
+			}else {
+				$nextBtn.show();
+			}//if~else end
+			
+			//prevBtn에 대한 처리
+			if(idx==0) {
+				$prevBtn.hide();
+			}else {
+				$prevBtn.show();
+			}//if~else end
+
+			$imgBox.css("left",-(idx*480));
+		
+		}
+			
+		</script>
+	</body>
+</html>
+

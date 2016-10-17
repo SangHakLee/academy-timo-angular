@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko" ng-app="directiveApp">
+<head>
+    <meta charset="UTF-8">
+    <title>커스텀 디렉티브</title>
+    <!-- canvas-box.css import -->
+    <link href="directive/angular-canvas.box.css" rel="stylesheet" />
+</head>
+<body ng-controller="ctrl">
+<!--
+<div class="box">
+    <canvas></canvas>
+</div>
+
+<canvas-box></canvas-box>
+<div canvas-box></div>
+<div class="canvas-box"></div>
+-->
+
+<canvas-box ng-repeat="data in dataList"></canvas-box>
+
+<script src="js/angular.min.js"></script>
+<!-- angular-canvas.box.js를 import -->
+<script src="directive/angular-canvas.box.js"></script>
+<script>
+
+    var app = angular.module("directiveApp",["canvas-box"]);
+    
+    app.controller("ctrl",["$scope",function ($scope) {
+
+        $scope.dataList = [
+            {color:"skyblue",cWidth:100,cHeight:80,cX:10,cY:30,x:100,y:200,width:300,height:300},
+            {color:"hotpink",cWidth:200,cHeight:100,cX:40,cY:10,x:400,y:250,width:400,height:400}
+        ];
+
+    }]);//controller() end
+
+    /*
+        directive의 종류(district)
+        1) 요소(element) : E
+        2) 속성(attribute) : A
+        3) 클래스(class) : C
+        4) 코멘트(comment) : M
+
+        디렉티브 이름 : '-' 표기법
+     */
+
+</script>
+</body>
+</html>

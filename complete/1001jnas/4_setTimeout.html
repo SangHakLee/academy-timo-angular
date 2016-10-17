@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html  lang="ko">
+	<head>
+		<meta  charset="utf-8"/>
+		<title>setTimeout</title>
+		<style>
+			body {
+				text-align: center;
+				background:#EDE9DF;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>5초 후 구글로 이동</h1>
+		<img src="img/loader.gif" alt="로딩중" />
+		<script>
+			//자바스크립트에 타이머관련 함수
+			//1) setTimeout : 특정시간후 한번만 작동
+			//2) setInterval : 특정시간후 계속 작동
+
+			setTimeout(function(){
+				//alert("구굴!!");
+
+				//주소창객체(BOM): location
+
+				location.href="http://google.com";
+
+			},5000);
+
+
+		</script>
+	</body>
+</html>
+
+
+
+
+
+
+

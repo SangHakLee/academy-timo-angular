@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<title>클래스관련메서드</title>
+<style>
+	div.box {
+		width:100px;
+		height:100px;
+		border:1px solid #333;
+	}
+	
+	div.click {
+		background:skyblue;
+		border-radius:50px;
+	}
+	
+	.shadow {
+		box-shadow:0 0 5px #333;
+	}
+</style>
+</head>
+<body>
+<p>
+	<button>붙였다떼기</button>
+</p>
+<div class="box"></div>
+<script src="js/jquery.js"></script>
+<script>
+	/*
+		id는 HTML내부에 같은 이름이 한개라도 있으면 안됨
+		class는 중복가능
+		하나의 요소에 class 중첩이 가능하기 때문에
+		기존의 클래스는 두고, 더해지거나, 삭제할 수 있어야 합니다.
+
+		attr메서드를 사용하는 것이 아니라
+		addClass, removeClass, toggleClass
+	 */
+	$("button").click(function () {
+
+		$(".box").toggleClass("click");
+		//기존의 box라는 클래스는 그대로 두고 click도 추가함
+
+	});//button click() end
+</script>
+</body>
+</html>
+
+
+
+

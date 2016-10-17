@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>jquery의 애니메이션</title>
+    <style>
+        .circle {
+            width:100px;
+            height:100px;
+            border-radius: 50px;
+            /*box-shadow:5px 10px 10px #424242;*/
+            box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24),
+                        0 17px 50px 0 rgba(0, 0, 0, 0.19);
+            margin:10px 0;
+            position: relative;
+            left:0;
+        }
+        #css3 {
+            background: lightpink;
+            transition: .3s linear;
+        }
+        #css3.move {
+            left:1000px;
+        }
+
+        #jquery {
+            background: skyblue;
+        }
+    </style>
+</head>
+<body>
+    <p>
+        <button>움직여!</button>
+    </p>
+    <div id="css3" class="circle"></div>
+    <div id="jquery" class="circle"></div>
+<script src="js/jquery.js"></script>
+<script>
+
+    $("button").click(function () {
+        $("#css3").addClass("move");
+
+        //jquery의 애니메이션 메서드 : animate(CSS변화값객체[,시간,가속도,콜백함수])
+
+        $("#jquery").animate({left:1000},300,"linear");
+
+    });//click() end
+
+</script>
+</body>
+</html>

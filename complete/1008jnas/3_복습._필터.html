@@ -1,0 +1,61 @@
+<!doctype html>
+<html ng-app="filterApp">
+<head>
+    <meta charset="UTF-8">
+    <title>angular복습 / filter</title>
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+</head>
+<body ng-controller="ctrl">
+<h1>스마트폰 목록</h1>
+<label>검색 : <input type="text" ng-model="q" kr-input
+                   placeholder="이름검색"/></label>
+<label><input type="radio" ng-model="price" name="order" value="price"/>가격 <i class="fa fa-arrow-up"></i></label>
+<label><input type="radio" ng-model="price" name="order" value="-price"/>가격 <i class="fa fa-arrow-down"></i></label>
+<label><input type="radio" ng-model="price" name="order" value="release"/>출시일 <i class="fa fa-arrow-up"></i></label>
+<label><input type="radio" ng-model="price" name="order" value="-release"/>출시일 <i class="fa fa-arrow-down"></i></label>
+<ul>
+    <li ng-repeat="phone in phoneList|filter:{'name':q}|orderBy:price">
+        <h2>{{phone.name}}</h2>
+        <p>
+            가격 : {{phone.price|currency:undefined:0}} /
+            출시일 : {{phone.release|date:"yyyy년 M월 d일"}}
+        </p>
+    </li>
+</ul>
+<!-- angular import -->
+<script src="js/angular.min.js"></script>
+<!-- 국제화처리(한국) -->
+<script src="js/angular-locale_ko.js"></script>
+<!-- 한글 입력시 바로 처리가 가능한 디렉티브 불러오기 -->
+<script src="js/angular-ko.input.js"></script>
+<script>
+
+    var app = angular.module("filterApp",["kr-input"]);
+
+    /*
+        angular의 필터들
+        1) currency(통화)
+        2) 날짜
+        3) orderBy
+        4) filter
+
+        필터 사용 '|'
+        옵션 ':'
+
+     */
+
+    //controller설정
+    app.controller("ctrl",["$scope",function($scope){
+
+        $scope.phoneList = [
+            {"name":"아이폰7","price":745800,"release":new Date("2016-10-21")},
+            {"name":"갤럭시 노트7","price":513600,"release":new Date("2016-08-19")},
+            {"name":"V20","price":980000,"release":new Date("2016-09-29")},
+            {"name":"엑스페리아 x 퍼포먼스","price":795800,"release":new Date("2016-07-04")}
+        ];
+    }]);
+
+
+</script>
+</body>
+</html>

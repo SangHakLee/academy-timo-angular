@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html ng-app="resourceApp">
+<head>
+	<meta charset="UTF-8">
+	<title>할일 목록2</title>
+	<style>
+		body {
+			margin:0;
+		}
+		#wrap {
+			width:1000px;margin:auto;border:1px solid #424242;}
+
+		#header {
+			width:1000px;
+			background:#00BCD4;
+			border-bottom:1px solid #424242;
+			border-top:1px solid #00B8D4;
+		}
+
+		#header ul {
+			margin:0;
+			padding:0;
+			list-style: none;
+			overflow: hidden;
+		}
+
+		#header li {
+			float:left;
+			padding:5px 10px;
+		}
+		#content {
+			min-height:500px;
+			padding:20px;
+		}
+		#footer {
+			height:100px;
+			line-height:100px;
+			text-align:center;
+			background:#00BCD4;
+			border-top:1px solid #424242
+		}
+
+	</style>
+</head>
+<body>
+<div id="wrap">
+	<div id="header">
+		<h1>할일앱</h1>
+		<ul>
+			<li><a href="#todo">할일목록</a>
+			<li><a href="#write">할일쓰기</a>
+		</ul>
+	</div>
+	<div id="content">
+		<ng-view></ng-view>
+	</div>
+	<div id="footer">&copy; 2016 jna.com</div>
+</div>
+<script src="js/angular.min.js"></script>
+<!-- $route import  -->
+<script src="js/angular-route.min.js"></script>
+<!-- $http은 기본, $resource는 import  -->
+<script src="js/angular-resource.min.js"></script>
+<script>
+	var app = angular.module("resourceApp",["ngRoute","ngResource"]);
+
+	//service(),factory()를 이용해서 동적인 객체를 생성후
+	//필요한 컨트롤러에 주입할 수 있습니다.
+	//정적인 값은 value()
+
+	app.service("Todo",function($resource){
+		// $resource("주소",{파라미터},{메서드확장}); <- Restful API
+		return $resource(
+				"https://api.mlab.com/api/1/databases/jna2/collections/todos/:id",
+				{
+					"apiKey":"mEnc5U1gz4CKrRrgzKUUkIo2nLSbPNyO",
+				"id":"@_id.$oid"
+				},//@객체안의 속성임을 의미
+				{
+					"update":{"method":"PUT"}
+				});
+	});
+
+//	app.service("person",function() {
+//		return {"name":"정우성"};
+//	});
+
+	//app.filter();
+
+	//app.directive();
+
+
+	app.config(function($routeProvider) {
+
+		$routeProvider.when("/todo",{
+			"templateUrl":"view/todo.html",
+			"controller":"todoCtrl"
+		});
+
+		$routeProvider.when("/write",{
+			"templateUrl":"view/write.html",
+			"controller":"writeCtrl"
+		});
+
+		//디폴트 주소
+		$routeProvider.otherwise({"redirectTo":"/todo"});
+
+	});//config end
+
+	app.controller("writeCtrl",["$scope","Todo","$location",
+		function ($scope,Todo,$location) {
+			//location객체를 angular에서 편리하게 사용하기 위해서
+			//추상화 시킨 $location객체가 있음
+
+			$scope.writeTodo = function(title) {
+
+				var todo = new Todo({title:title,end:false});
+
+				todo.$save(function() {
+					$location.path("/todo");
+				});//$save() end
+
+			}//writeTodo() end
+
+		}])
+
+	app.controller("todoCtrl",["$scope","Todo",function ($scope,Todo) {
+		//loader 를 숨기기
+		$scope.loader = false;
+
+		//할일 수정하는 함수
+		$scope.updateTodo = function(todo) {
+
+			todo.$update(function() {
+				getTodos();
+			});//$update() end
+
+		}//updateTodo() end
+
+		//할 일을 삭제하는 함수
+		$scope.deleteTodo = function(todo){
+
+//			Todo.delete({id:todo._id.$oid},function() {
+//				getTodos();
+//			});
+
+			todo.$delete(function() {
+				getTodos();
+			});//$delete() end
+
+		};//deleteTodo() end
+
+		//할일목록을 불러오는 함수
+		function getTodos(){
+			//로더 보여주기
+			$scope.loader = true;
+
+			Todo.query(function (data) {//query()는 여러 todo를 불러오는 메서드
+				$scope.todos = data;
+				$scope.loader = false;
+			});//query() end
+
+		}//getTodos() end
+
+		getTodos();//페이지 로딩시 바로 작동
+
+	}]);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>애플 무한슬라이드</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/yoon.css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+
+    <style>
+        body {
+            font:20px 'Yoon Gothic',sans-serif;
+        }
+        #gnb {
+            width:100%;
+            height:44px;
+            background-color:#333333;
+            background-image: url(img/gnb.png);
+            background-position: center;
+            background-repeat:no-repeat;
+        }
+        #main {
+            width:1200px;
+            height:900px;
+            margin:auto;
+            position: relative;
+            overflow: hidden;
+        }
+        .paddlenav-arrow:hover {
+            opacity: .8;
+        }
+       .paddlenav-arrow {
+            z-index: 1000;
+            border-radius: 32px;
+            color: #848484;
+            font-size: 40px;
+            line-height: 50px;
+           background-color: transparent;
+           opacity: .6;
+           background-color: rgba(180,180,180,0.4);
+           color: #666;
+           display: block;
+           overflow: hidden;
+           position: absolute;
+           text-align: center;
+           -webkit-transition: 250ms opacity linear;
+           transition: 250ms opacity linear;
+        }
+         .paddlenav-arrow-next {
+            right: 18px;
+        }
+        .paddlenav-arrow-previous {
+            left:18px;
+        }
+         .paddlenav-arrow-next, .paddlenav-arrow-previous {
+            margin-top: -32px;
+            width: 64px;
+            height: 64px;
+             top: 50%;
+        }
+
+        button {
+            background: none;
+            border: 0;
+            box-sizing: content-box;
+            color: inherit;
+            cursor: pointer;
+            font: inherit;
+            line-height: inherit;
+            overflow: visible;
+            vertical-align: inherit;
+            padding:0;
+            text-align: center;
+        }
+        .gallery-slide-wrapper {
+            width:1200px;
+            height:900px;
+            background:red;
+            position: relative;
+            will-change: transform;
+            transform: translate3d(0, 0, 0);
+            transition: .8s cubic-bezier(.59,.08,.74,.93);
+
+        }
+         .gallery-item-content {
+            position: absolute;
+            z-index: 1000;
+            top: 14%;
+            height: 100%;
+            width: 100%;
+            text-align: center;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+             transform:scale(.9) translate3d(500px,0,0);
+             transition: .8s cubic-bezier(.7,.14,.74,.96);
+        }
+         .gallery-item.now .gallery-item-content {
+             transform:scale(1)  translate3d(0,0,0);
+         }
+        .gallery-item {
+            display: block;
+            position: absolute;
+            z-index: 1;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            color: #333;
+            will-change: transform;
+            transform: translate3d(0, 0, 0);
+            box-shadow: -4px 0px 10px 0px rgba(0,0,0,0.1);
+        }
+        .gallery-item.move {
+            transition: .8s cubic-bezier(.59,.08,.74,.93);
+        }
+        #homepage-gallery-iphone,#homepage-gallery-event {
+            background:#000;
+            color:#fff;
+        }
+
+         .logo-image-watch {
+            width: 148px;
+            height: 56px;
+            background-size: 148px 56px;
+            background-repeat: no-repeat;
+            background-image: url("img/logo_watch_large.png");
+             margin:auto;
+            position: relative;
+        }
+        .logo-image-iphone {
+            width: 95px;
+            height: 24px;
+            background-size: 95px 24px;
+            background-repeat: no-repeat;
+            background-image: url("img/logo_iphone_large.png");
+            margin:auto;
+            position: relative;
+        }
+        .logo-image-airpods {
+              width: 108px;
+              height: 23px;
+              background-size: 108px 23px;
+              background-repeat: no-repeat;
+              background-image: url("img/logo_airpods_large.png");
+            margin:auto;
+              position: relative;
+          }
+         .logo-image-event {
+            width: 283px;
+            height: 30px;
+            background-size: 283px 30px;
+            background-repeat: no-repeat;
+            background-image: url("img/logo_event_large.png");
+            margin:auto;
+            position: relative;
+        }
+        .logo-image-label {
+            position: absolute;
+            clip: rect(1px 1px 1px 1px);
+            clip: rect(1px, 1px, 1px, 1px);
+            -webkit-clip-path: inset(0px 0px 99.9% 99.9%);
+            clip-path: inset(0px 0px 99.9% 99.9%);
+            overflow: hidden;
+            height: 1px;
+            width: 1px;
+            padding: 0;
+            border: 0;
+        }
+        .play-icon {
+            width: 90px;
+            height: 90px;
+            background-size: 90px 90px;
+            background-repeat: no-repeat;
+            background-image: url("img/play_button_large.png");
+            position: absolute;
+            z-index: 1000;
+            left: 50%;
+            top: 54%;
+            background-color: #1e1e1e;
+            background-color: rgba(30,30,30,0.7);
+            margin-left: -45px;
+            margin-top: -45px;
+            border-radius: 45px;
+            -webkit-transition: background-color 0.25s linear;
+            transition: background-color 0.25s linear;
+        }
+        .homepage-headline {
+            font-size: 42px;
+            line-height: 1;
+            font-weight: 200;
+            letter-spacing: 0em;
+            margin-top: 0.3em;
+        }
+        .gallery-image-iphone {
+
+            background-image: url("img/iphone_square_large.jpg");
+        }
+        .gallery-image-watch {
+            background-image: url("img/watch_large.jpg");
+            top: -5%;
+        }
+        .gallery-image-airpods {
+            background-size: contain;
+            background-position: bottom center;
+            background-repeat: no-repeat;
+            background-image: url("img/airpods_large.jpg");
+        }
+
+         .gallery-image-event {
+            background-size: auto 100%;
+            background-position: bottom center;
+            background-repeat: no-repeat;
+            background-image: url("img/event_large.jpg");
+        }
+
+        .gallery-item-event .homepage-headline {
+            margin-top: -0.1em;
+        }
+
+        .gallery-item.now .gallery-image {
+            transform:scale(1);
+            transition: none;
+        }
+
+         .gallery-image {
+             background-size: auto 100%;
+             background-repeat: no-repeat;
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            height: 110%;
+             transform:scale(.9);
+             transition: .8s cubic-bezier(.59,.08,.74,.93);
+        }
+
+    </style>
+</head>
+<body>
+    <nav id="gnb">
+    </nav>
+    <div id="main">
+        <nav>
+            <ul>
+                <li><button class="paddlenav-arrow paddlenav-arrow-previous">
+                    <i class="fa fa-angle-left"></i>
+                </button></li>
+                <li><button class="paddlenav-arrow paddlenav-arrow-next">
+                    <i class="fa fa-angle-right"></i>
+                </button></li>
+            </ul>
+        </nav>
+        <div class="gallery-slide-wrapper">
+            <a href="/kr/iphone-7/" id="homepage-gallery-iphone" class="gallery-item now">
+                <div class="gallery-item-content">
+                    <h1 class="logo-image logo-image-iphone"><span class="logo-image-label">iPhone</span></h1>
+                    <h2 class="homepage-headline">이것이 바로 7.</h2>
+                </div>
+                <figure class="gallery-image gallery-image-iphone"></figure>
+            </a>
+            <a href="/kr/apple-watch-series-2/" id="homepage-gallery-watch" class="gallery-item">
+                <div class="gallery-item-content">
+                    <h1 class="logo-image logo-image-watch"><span class="logo-image-label">Apple Watch Series 2</span></h1>
+                    <h2 class="homepage-headline">새롭게 선보이는 Series 2.</h2>
+                </div>
+                <figure class="gallery-image gallery-image-watch"></figure>
+            </a>
+            <a href="/kr/airpods/" id="homepage-gallery-airpods" class="gallery-item">
+                <div class="gallery-item-content">
+                    <h1 class="logo-image logo-image-airpods"><span class="logo-image-label">AirPods</span></h1>
+                    <h2 class="homepage-headline">선이 없다. 간결하다. <span class="nowrap">경이롭다.</span></h2>
+                </div>
+                <figure class="gallery-image gallery-image-airpods"></figure>
+            </a>
+            <a href="/kr/apple-events/september-2016/" id="homepage-gallery-event" class="gallery-item">
+                <div class="gallery-item-content">
+                    <h1 class="logo-image logo-image-event"><span class="logo-image-label">Apple 스페셜 이벤트</span></h1>
+                    <h2 class="homepage-headline">키노트 시청하기.</h2>
+                    <div class="play-icon"></div>
+                </div>
+                <figure class="gallery-image gallery-image-event"></figure>
+            </a>
+        </div>
+    </div>
+<script src="js/jquery.js"></script>
+<script>
+
+    // wrapper
+    var $wrapper = $(".gallery-slide-wrapper");
+
+    //아이템들(아이폰,와치,에어팟,키노트)
+    var $items = $(".gallery-item");
+
+
+    $items.eq(0).css("transform","translate3d(0,0,0)");
+    $items.eq(1).css("transform","translate3d(1200px,0,0)");
+    $items.eq(2).css("transform","translate3d(2400px,0,0)");
+    $items.eq(3).css("transform","translate3d(-1200px,0,0)");
+
+    //move를 조금있다가 줌
+    setTimeout(function () {
+        $items.addClass("move");
+    },10);
+
+    var left = 0;
+
+    // 이전버튼을 눌렀을때
+    $(".paddlenav-arrow-previous").click(function () {
+
+       // left = left - 1200;
+        left-=1200;
+
+        //now를 제거
+       var $tmp =  $(".now").appendTo(".gallery-slide-wrapper");
+
+        setTimeout(function() {
+            $tmp.removeClass("now");
+        },1);
+
+        var $items = $(".gallery-item").addClass("move");
+
+        $items.eq(0).addClass("now").css("transform","translate3d("+ -(left)+"px,0,0)");
+        $items.eq(1).css("transform","translate3d("+ -(left-1200)+"px,0,0)");
+        $items.eq(2).removeClass("move").css("transform","translate3d("+ -(left-2400)+"px,0,0)");
+        $items.eq(3).css("transform","translate3d("+ -(left+1200)+"px,0,0)");
+
+        $wrapper.css("transform","translate3d("+left+"px,0,0)");
+
+    });//paddlenav-arrow-previous click() end
+
+
+
+</script>
+</body>
+</html>

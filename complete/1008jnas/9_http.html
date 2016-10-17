@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>비동기통신을 위한 $http</title>
+    <style>
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            float: left;
+            width: 120px;
+            padding: 10px;
+            margin: 10px;
+            box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+            border:5px solid #757575;
+        }
+
+        h3 {
+            margin:5px 0;
+            text-align: center;
+            font-size:15px;
+            overflow:hidden;
+            white-space:nowrap;
+            text-overflow:ellipsis;
+            width:120px;
+        }
+        img {
+            display: block;
+        }
+        li.ng-animate {
+
+        }
+        li.ng-enter {
+            transition: 1s ease;
+            transform:perspective(600px) translateZ(1000px) rotateX(1440deg);
+        }
+        li.ng-enter-active {
+            transform:perspective(600px) translateZ(0) rotateX(0deg);
+        }
+    </style>
+</head>
+<body>
+	<button>시작</button>
+    <img src="img/loader.gif" ng-hide="loader"/>
+<ul>
+   
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트의 객체</title>
+    <style>
+        .test {
+            color:red;
+        }
+    </style>
+</head>
+<body>
+<h1 class="test"></h1>
+<script>
+    //객체란 속성(attribute)들의 묶음
+
+    //객체의 종류 :
+    // BOM(screen,window,document,location,history)
+    // DOM(document object model : 요소들)
+    // 내장객체 : String, Math, Date,...
+    // jquery객체 : jquery에서 사용하는 객체
+
+    //객체 생성 방법
+    //1) {속성명:속성값,속성명:속성값,.......}
+    //2) new 생성자함수();
+    var obj = {"name":"이시언","height":176,"weight":69};
+
+    //객체에서 속성접근법 : '.'
+
+    obj.name = "김연아";//세팅
+
+    alert(obj.name);//얻어옴
+
+</script>
+</body>
+</html>

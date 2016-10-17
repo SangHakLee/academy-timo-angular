@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>javascript의 for문과 jquery등의 each</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/notosanskr.css"/>
+    <style>
+
+        body,button {
+            font:20px "Noto Sans KR",sans-serif;
+        }
+
+        #displayList {
+            margin:20px;
+            width:400px;
+            height:300px;
+            background:#81D4FA;
+            padding:20px;
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+<button id="startBtn">7단!</button>
+<ul id="displayList">
+
+</ul>
+<script src="js/jquery.js"></script>
+<script>
+
+    //var $startBtn = $("#startBtn");
+
+    $("#startBtn").on("click",function () {
+
+        /*
+            제어문 : 프로그래밍을 제어하는 문장
+            1) 분기문 : if(~else), switch
+            2) 반복문 : for, while
+
+
+            if(조건문) {
+                조건문이 true면 이곳이 작동
+            }else {
+                조건문이 false면 이곳이 작동
+            }
+
+            for( 초기식 ; 조건식 ; 증감식 ) {
+                (조건식이 true일 동안) 반복구문
+            }
+
+            jquery의 each
+
+            $.each(배열,function(){
+            this
+            }) : 함수
+
+            $(배열).each(function() {
+                this <-- 각각
+            }) : 메서드
+
+            _.each(배열,function(변수명){
+                변수명 <-- 각각
+            })
+
+            $(movies).each(function(){
+                $("tr").text(this.name);
+            });
+
+            _.each(movies,function(movie){
+                $("tr").text(movie.name);
+            });
+
+         */
+
+        for( var i = 1 ; i <= 9 ; i++ ) {
+            $("<li>").text("7 * " + i + " = "+ 7*i ).appendTo("#displayList");
+        }//for end
+
+//        $("<li>").text("7*1=7").appendTo("#displayList");
+//        $("<li>").text("7*2=14").appendTo("#displayList");
+//        $("<li>").text("7*3=21").appendTo("#displayList");
+//        $("<li>").text("7*4=28").appendTo("#displayList");
+//        $("<li>").text("7*5=35").appendTo("#displayList");
+//        $("<li>").text("7*6=42").appendTo("#displayList");
+//        $("<li>").text("7*7=49").appendTo("#displayList");
+//        $("<li>").text("7*8=56").appendTo("#displayList");
+//        $("<li>").text("7*9=63").appendTo("#displayList");
+
+    });//#startBtn click() end
+
+</script>
+</body>
+</html>

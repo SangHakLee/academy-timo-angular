@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko" ng-app="animationApp">
+<head>
+    <meta charset="UTF-8">
+    <title>angular의 애니메이션</title>
+    <style>
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+
+        body {
+            text-align: center;
+        }
+
+        ul {
+            width:200px;
+            margin: auto;
+            padding: 0;
+        }
+        li {
+           list-style: none;
+            width:200px;
+            height:80px;
+            border:1px solid #eee;
+            box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24),
+                        0 17px 50px 0 rgba(0, 0, 0, 0.19);
+            text-align: center;
+            font:bold 30px/80px "Kakao",sans-serif;
+            cursor: pointer;
+            background:#fff;
+            color:#424242;
+        }
+
+        /*
+        angular의 애니메이션은 클래스를 추가시키면 됩니다.
+
+        .ng-animate : 기본
+        .ng-enter : 추가의 기본
+        .ng-enter-active : 추가의 끝
+        .ng-leave : 삭제의 기본
+        .ng-leave-active : 삭제의 끝
+
+        */
+        li.ng-animate {
+
+        }
+
+        li.ng-enter {
+            transition:.5s ease;
+            transform:translate3d(-2000px,0,0);
+        }
+        li.ng-enter-active {
+            transform:translate3d(0,0,0);
+        }
+        li.ng-leave {
+            transition: .8s ease;
+            transform:perspective(1000px) translate3d(0,0,0) rotateX(0deg);
+        }
+        li.ng-leave-active {
+            transform:perspective(1000px) translate3d(0,0,2000px) rotateX(360deg);
+        }
+
+        input {
+            width:200px;
+            font:bold 20px/30px "Kakao",sans-serif;
+            margin: 10px;
+            padding: 10px;
+        }
+
+    </style>
+</head>
+<body ng-controller="ctrl">
+    <form ng-submit="add(person,list)">
+    <input ng-model="person" placeholder="이름입력"/>
+    </form>
+    <ul>
+        <li ng-click="remove($index,list)" ng-repeat="actor in list">{{actor}}</li>
+    </ul>
+<script src="js/angular.min.js"></script>
+<!-- angular animation -->
+<script src="js/angular-animate.min.js"></script>
+<script>
+    var app = angular.module("animationApp",["ngAnimate"]);
+
+    //모델에 입력 / 삭제
+    //뷰가 변경
+    
+    app.controller("ctrl",["$scope",function ($scope) {
+
+        $scope.remove = function ($index,list) {
+            list.splice($index,1);
+        }//remove() end
+
+        $scope.add = function (person,list) {
+            list.push(person);
+            $scope.person = "";
+        }//add() end
+
+        $scope.list = ["황정민","정우성","주지훈","곽도원"];
+
+    }]);//controller() end
+
+</script>
+</body>
+</html>

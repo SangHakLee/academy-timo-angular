@@ -1,0 +1,144 @@
+<!DOCTYPE html >
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<title>복습</title>
+<link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/notosanskr.css"/>
+<style>
+	.btn {
+		border:none;
+		color:#fff;
+		width:120px;
+		height:50px;
+		cursor: pointer;
+		font:100 24px 'Noto Sans KR',sans-serif;
+	}
+	.btn:hover {
+		font-weight: 900;
+		box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+	}
+	#exBox {
+		width:400px;
+		height:300px;
+		box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+		text-align: center;
+		padding:20px;
+		background: #fff;
+		position: fixed;
+		left:50%;
+		top:50%;
+		margin:-170px 0 0 -220px;
+		display: none;
+	}
+	dl {
+		width:300px;
+		height:200px;
+		border:1px solid #616161;
+		padding:10px;
+		margin: auto;
+	}
+	dt,dd {
+		margin:7px;
+		font-size:18px;
+		text-align: left;
+		color:#616161;
+	}
+	dt {
+		font-weight: 900;
+		font-size:22px;
+		text-align: center;
+	}
+	#color {
+		display: inline-block;
+		width:50px;
+		height:30px;
+		background:#999;
+		text-align: center;
+	}
+	#openBtn {
+		background:#FFC107;
+	}
+	#pinkBtn {
+		background:#E91E63;
+	}
+	#blueBtn {
+		background:#2196F3;
+	}
+	#greenBtn {
+		background: #4CAF50;
+	}
+</style>
+</head>
+<body>
+<button id="openBtn" class="btn">버튼</button>
+<div id="exBox">
+	<p>
+		<button id="pinkBtn" class="btn">멋진 핑크</button>
+		<button id="blueBtn" class="btn">쿨한 파랑</button>
+		<button id="greenBtn" class="btn">네온 녹색</button>
+	</p>
+	<dl>
+		<dt>클릭한 버튼정보</dt>
+		<dd>클릭한 버튼의 index : <span id="index">?</span></dd>
+		<dd>클릭한 버튼의 뒷배경색 : <span id="color">?</span></dd>
+		<dd>클릭한 버튼의 글자 : <span id="text">?</span></dd>
+	</dl>
+</div><!--//exBtn -->
+<!-- jquery import -->
+<script src="js/jquery.js"></script>
+<script>
+
+	//1) id가 openBtn인 버튼요소를 선택후 click이벤트리스너를 붙입니다.
+	//$("#openBtn").click(function(){}); 와 똑같은 거
+	$("#openBtn").on("click",function(){
+		//2) 눌렀군요라는 메세지를 보여주는 확인버튼이 한개만 있는
+		//다이얼로그창을 띄웁니다.
+		alert("눌렀군요!");
+
+		//3) body요소의 뒷배경색을 변경
+
+		$("body").css("background","#673AB7");
+
+		//4) id가 exBox인 요소가 나타남
+		$("#exBox").fadeToggle(500);
+
+
+	});//#openBtn click() end
+
+
+	//5) 멋진핑크,쿨한파랑,네온녹색버튼에 같이 click이벤트리스너를 붙임
+	$("#exBox .btn").click(function () {
+
+		//우리가 클릭한 그 버튼은 this고
+		//this는 순수자바스크립트 요소객체
+		//this를 jquery객체로 변환 : $(this)
+
+		//6) 우리가 클릭한 그 버튼의 index번지를 얻어옴
+		var idx = $(this).index();
+
+		//7) id가 index인 span요소를 선택하고 그 글자를 idx의 값으로 세팅
+		$("#index").text(idx);
+
+		//8) 우리가 클릭한 그 버튼의 뒷배경색을 얻어옴
+		var color = $(this).css("background-color");
+
+		//9) id가 color인 span요소의 뒷배경색을 세팅
+		$("#color").css("background",color);
+
+		//10) 우리가 클릭한 그 버튼의 글자를 얻어옴
+		var txt = $(this).text();
+
+		//11) id가 text인 span요소를 선택후 글자를 txt의 값으로 세팅
+		$("#text").text(txt);
+
+	});
+
+
+
+</script>
+</body>
+</html>
+
+
+
+

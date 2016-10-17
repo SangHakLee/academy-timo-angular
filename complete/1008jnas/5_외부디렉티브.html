@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko" ng-app="directiveApp">
+<head>
+    <meta charset="UTF-8">
+    <title>외부 디렉티브의 사용</title>
+    <!-- angular-moment-picker용 css -->
+    <link rel="stylesheet" href="css/angular-moment-picker.css"/>
+    <link rel="stylesheet" href="css/angular-switcher.css"/>
+    <style>
+
+        .moment-picker .moment-picker-container {
+            box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+        }
+        /* bar height */
+        .styled .switcher-line:before { height: 20px; }
+        /* bar backgrounds */
+        .styled .switcher-line:before { background: #e35144; }
+        .styled .active .switcher-line:before { background: deepskyblue; }
+        .switcher.active .switcher-label.false {color:#e35144}
+        .switcher.active .switcher-label.true {color:deepskyblue}
+    </style>
+</head>
+<body>
+<h1>날짜선택</h1>
+<input moment-picker="now" format="YYYY-MM-DD" locale="ko" ng-model="now">
+<hr />
+<h2>토글버튼</h2>
+<switcher class="styled"
+          ng-model="style"
+          ng-disabled="isDisabled"
+          true-label=""
+          false-label="">
+</switcher>
+
+
+<script src="js/angular.min.js"></script>
+<script src="js/moment-with-locales.js"></script>
+<!-- moment picker -->
+<script src="js/angular-moment-picker.js"></script>
+<!-- switcher -->
+<script src="js/angular-switcher.js"></script>
+<script>
+    var app = angular.module("directiveApp",["moment-picker","switcher"]);
+
+</script>
+</body>
+</html>

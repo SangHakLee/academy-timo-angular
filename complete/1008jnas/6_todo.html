@@ -1,0 +1,188 @@
+<!doctype html>
+<html ng-app="todoApp">
+<head>
+    <meta charset="UTF-8">
+    <title>할일관리프로그램</title>
+    <link rel="stylesheet" href="css/kakao.font.css"/>
+    <link rel="stylesheet" href="css/angular-switcher.css"/>
+    <style>
+        body {
+            font:200 20px "Kakao",sans-serif;
+        }
+        #wrap {
+            width:800px;
+            margin:auto;
+            box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+            padding:20px;
+        }
+        input,button {
+            padding: 5px;
+            font:200 20px "Kakao",sans-serif;
+        }
+        button {
+            background:#9E9E9E;
+            border:none;
+            cursor: pointer;
+            padding:8px 12px;
+            color:#fff;
+            transition: .2s ease;
+        }
+        button:hover {
+            background: #424242;
+            box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+        }
+        /* bar height */
+        .styled .switcher-line:before { height: 20px; }
+        /* bar backgrounds */
+        .styled .switcher-line:before { background: #e35144; }
+        .styled .active .switcher-line:before { background: deepskyblue; }
+
+        ul {
+            padding:0;
+        }
+        li {
+            color:crimson;
+            list-style: none;
+        }
+        li.end {
+            color:deepskyblue;
+        }
+        
+        li.ng-animate {
+            /*애니메이션될 요소의 기본 css */
+            transition: .5s ease;
+        }
+        li.ng-enter {
+            transform: translate(-2000px,0);
+        }
+        li.ng-enter.ng-enter-active {
+            transform: translate(0,0);
+        }
+        li.ng-leave {
+            transform: translate(0,0);
+        }
+        li.ng-leave.ng-leave-active {
+            transform: translate(-2000px,0);
+        }
+
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+    </style>
+</head>
+<body ng-controller="ctrl" ng-cloak>
+<div id="wrap">
+<h1>님의 할일목록</h1>
+<p>
+    전체할일 : <em ng-bind="todos.length"></em>개
+    / 
+    미완료 : <span>{{checkEnd(todos)}}</span>개
+    <button ng-click="removeCompleteTodos(todos)">완료된 할일제거</button>
+</p>
+<form ng-submit="createTodo(todos,name)">
+<fieldset>
+    <legend>할일입력폼</legend>
+    <input type="text" placeholder="할 일입력" ng-model="name"/>
+    <button>입력</button>
+</fieldset>
+</form>
+<h2>할일목록</h2>
+<ul>
+    <li ng-repeat="todo in todos" ng-class="{end:todo.end}">
+        <label>
+            <input type="checkbox" ng-model="todo.end"/>
+            {{todo.title}}
+        </label>
+       <button ng-click="deleteTodo(todos,$index)">삭제</button>
+    </li>
+</ul>
+</div>
+<script src="js/angular.min.js"></script>
+<script>
+
+    //생성자 함수 선언
+    function Todo(title,end) {
+        this.title = title;
+        this.end = end;
+    }//생성자 함수 end
+
+    var app = angular.module("todoApp",[]);
+
+    app.controller("ctrl",["$scope",function($scope){
+
+        $scope.removeCompleteTodos = function(todos) {
+
+            //완료되지 않은 할일만 모으는 배열
+            var tmp = [];
+
+            //todos 각번지에 접근하여(forEach)
+            // end속성의 값이 false 일때(if)
+            // 임시배열에 push()
+
+            angular.forEach(todos,function (todo,index) {
+               if(!todo.end) {
+                    tmp.push(todo);
+               }//if() end
+            });//forEach() end
+
+            $scope.todos = tmp;//미완료된 할일만 모아놓은 배열으로 변경
+
+        }//removeCompleteTodos() end
+
+        $scope.checkEnd = function(todos) {
+            var size = 0;
+
+            //todos배열의 각번지에 접근해서(forEach 사용)
+            // 그 객체의 end속성값이 false일때 (if문 )
+            // size를 1증가
+
+            angular.forEach(todos,function(todo) {
+
+                if(todo.end==false) {
+                    size++;//사이즈 값을 1증가
+                }//if end
+
+            });//forEach() end
+
+            return size;
+        }//checkEnd() end
+
+        $scope.createTodo = function (todos,name) {
+
+            //todos안에 새로운 투두()객체를 만들어서 push()함
+            var todo = new Todo(name,false);
+            todos.push(todo);
+
+            //유저가 입력한 글자를 제거
+            $scope.name="";
+
+        }//createTodo() end
+
+        $scope.deleteTodo = function(todos,$index) {
+            //todos : 배열
+            //$index는 인덱스
+
+            todos.splice($index,1);
+
+        }//deleteTodo() end
+
+        $scope.todos = [
+            new Todo("아수라 보기",false),
+            new Todo("저녁먹기",true),
+            new Todo("퇴근하기",false),
+                new Todo("출근하기",true)
+        ];
+
+       /// $scope.todos[1].name = "김성수";
+
+
+
+    }]);//ctrl controller end
+
+
+</script>
+</body>
+</html>
+
+
+

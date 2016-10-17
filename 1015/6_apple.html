@@ -24,7 +24,7 @@
             height:900px;
             margin:auto;
             position: relative;
-            overflow: hidden;
+            /*overflow: hidden;*/
         }
         .paddlenav-arrow:hover {
             opacity: .8;
@@ -283,6 +283,42 @@
         </div>
     </div>
 <script src="js/jquery.js"></script>
+<script>
+    var $wrapper = $('.gallery-slide-wrapper');
+
+    var $items = $('.gallery-item');
+
+    $items.eq(0).css('transform', 'translate3d(0,0,0)');
+    $items.eq(1).css('transform', 'translate3d(1200px,0,0)');
+    $items.eq(2).css('transform', 'translate3d(2400px,0,0)');
+    $items.eq(3).css('transform', 'translate3d(-1200px,0,0)');
+
+    setTimeout(function(){
+        $items.addClass('move')
+    },10);
+
+    var left = 0 ;
+    // 이전 버튼 클릭시
+    $('.paddlenav-arrow-previous').click(function(){
+        left -= 1200;
+        $wrapper.css('transform', 'translate3d('+left+'px,0,0)');
+
+        var nowIdx = $('.now').removeClass('now')
+                .next()
+                .addClass('now')
+                .index();
+
+        var nextIdx = nowIdx + 1;
+        var dNextIdx = nextIdx + 1;
+        var prevIdx = dNextIdx + 1;
+
+        $items.eq(nowIdx).css('transform', 'translate3d('+ -(left) +'px,0,0)');
+        $items.eq(nextIdx).css('transform', 'translate3d('+ -(left-1200) +'px,0,0)');
+        $items.eq(dNextIdx).css('transform', 'translate3d('+ -(left-2400) +'px,0,0)');
+        $items.eq(prevIdx).css('transform', 'translate3d('+ -(left+1200) +'px,0,0)');
+
+    });
+</script>
    
 </body>
 </html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html ng-app="ajaxApp">
+<head>
+<meta charset="UTF-8">
+<title>할일 목록</title>
+<style>
+body {
+	margin:0;
+}
+	#wrap {
+	width:1000px;margin:auto;border:1px solid #424242;}
+	
+	#header {
+	width:1000px;
+	background:#00BCD4;
+	border-bottom:1px solid #424242;
+		border-top:1px solid #00B8D4;
+	}
+	
+	#header ul {
+		margin:0;
+		padding:0;
+		list-style: none;
+		overflow: hidden;
+	}
+	
+	#header li {
+		float:left;
+		padding:5px 10px;
+	}
+	#content {
+		min-height:500px;
+		padding:20px;
+	}
+	#footer {
+		height:100px;
+		line-height:100px;
+		text-align:center;
+		background:#00BCD4;
+		border-top:1px solid #424242
+	}
+	
+</style>
+</head>
+<body>
+<div id="wrap">
+	<div id="header">
+		<h1>할일앱</h1>
+		<ul>
+			<li><a href="#todo">할일목록</a>
+			<li><a href="#write">할일쓰기</a>
+		</ul>
+	</div>
+	<div id="content">
+		<ng-view></ng-view>
+	</div>
+	<div id="footer">&copy; 2016 jna.com</div>
+</div>
+<script src="js/angular.min.js"></script>
+<script src="js/angular-route.min.js"></script>
+<script>
+	var app = angular.module("ajaxApp",["ngRoute"]);
+
+	app.config(function($routeProvider) {
+
+		$routeProvider.when("/todo",{
+			"templateUrl":"view/todo.html",
+			"controller":"todoCtrl"
+		});
+
+		$routeProvider.when("/write",{
+			"templateUrl":"view/write.html",
+			"controller":"writeCtrl"
+		});
+
+		//디폴트 주소
+		$routeProvider.otherwise({"redirectTo":"/todo"});
+
+	});//config end
+	
+	app.controller("writeCtrl",["$scope","$http","$location",
+		function ($scope,$http,$location) {
+		//location객체를 angular에서 편리하게 사용하기 위해서
+		//추상화 시킨 $location객체가 있음
+
+		//alert("test");
+
+		$scope.writeTodo = function(title) {
+
+			//서버에 저장할 todo객체 생성
+			var todo = {"title":title,"end":false};
+
+			var promise = $http({
+				url:"https://api.mlab.com/api/1/databases/jna2/collections/todos/",
+				method:"POST",
+				params:{
+					apiKey:"mEnc5U1gz4CKrRrgzKUUkIo2nLSbPNyO"
+				},//파라미터
+				data:todo//넘길 메세지
+			});
+
+			promise.error(function () {
+				alert("에러");
+			});//error() end
+
+			promise.success(function (data) {
+
+				//성공했으면 주소 /todo로 이동
+				$location.path("/todo");
+
+			});//success() end
+
+		}//writeTodo() end
+
+	}])
+	
+	app.controller("todoCtrl",["$scope","$http",function ($scope,$http) {
+		//loader 를 숨기기
+		$scope.loader = false;
+
+		//할일 수정하는 함수
+		$scope.updateTodo = function(todo) {
+
+			var promise = $http({
+				url:"https://api.mlab.com/api/1/databases/jna2/collections/todos/"+todo._id.$oid,
+				method:"PUT",
+				params:{
+						apiKey:"mEnc5U1gz4CKrRrgzKUUkIo2nLSbPNyO"
+				},//파라미터
+				data:todo//넘길 메세지
+			});
+
+			promise.error(function() {
+				alert("에러");
+			});
+
+			promise.success(function(){
+				//alert("성공!");
+
+				getTodos();
+
+			});
+
+		}//updateTodo() end
+
+
+		//할 일을 삭제하는 함수
+		$scope.deleteTodo = function(todo){
+
+			console.log(todo);
+
+			//alert(todo._id.$oid);
+
+			var promise = $http({
+				url:"https://api.mlab.com/api/1/databases/jna2/collections/todos/"+todo._id.$oid
+				,method:"DELETE"
+				,params:{
+					apiKey:"mEnc5U1gz4CKrRrgzKUUkIo2nLSbPNyO"
+				}
+			});
+
+			promise.error(function() {
+				alert("에러");
+			});
+			promise.success(function(data) {
+
+				//성공했으니까 갱신시킴
+				getTodos();
+
+			});
+
+		};//deleteTodo() end
+
+
+
+		//할일목록을 불러오는 함수
+		function getTodos(){
+
+			//alert("ajax시작!!");
+
+			//로더 보여주기
+			$scope.loader = true;
+
+			//
+			//$scope.todos = [];
+
+			var promise = $http(
+						{url:"https://api.mlab.com/api/1/databases/jna2/collections/todos",
+						method:"GET",
+						params:{"apiKey":"mEnc5U1gz4CKrRrgzKUUkIo2nLSbPNyO"}
+						}
+					);
+
+			promise.error(function(){
+					alert("에러!!");
+			});
+
+			promise.success(function(data){
+				$scope.todos = data;
+				//로딩이미지숨김
+				$scope.loader = false;
+			});
+
+
+
+		}
+
+		getTodos();//페이지 로딩시 바로 작동
+
+
+//		$scope.getTodos = function() {
+//
+//		}
+
+
+	}]);
+
+</script>
+</body>
+</html>

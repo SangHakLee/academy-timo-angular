@@ -1,45 +1,45 @@
 <!DOCTYPE html>
 <html ng-app="resourceApp">
 <head>
-<meta charset="UTF-8">
-<title>할일 목록</title>
-<style>
-body {
-	margin:0;
-}
-	#wrap {
-	width:1000px;margin:auto;border:1px solid #424242;}
-	
-	#header {
-	width:1000px;
-	background:#00BCD4;
-	border-bottom:1px solid #424242;
-		border-top:1px solid #00B8D4;
-	}
-	
-	#header ul {
-		margin:0;
-		padding:0;
-		list-style: none;
-		overflow: hidden;
-	}
-	
-	#header li {
-		float:left;
-		padding:5px 10px;
-	}
-	#content {
-		min-height:500px;
-		padding:20px;
-	}
-	#footer {
-	height:100px;
-	line-height:100px;
-	text-align:center;
-		background:#00BCD4;
-	border-top:1px solid #424242}
-	
-</style>
+	<meta charset="UTF-8">
+	<title>할일 목록</title>
+	<style>
+		body {
+			margin:0;
+		}
+		#wrap {
+			width:1000px;margin:auto;border:1px solid #424242;}
+
+		#header {
+			width:1000px;
+			background:#00BCD4;
+			border-bottom:1px solid #424242;
+			border-top:1px solid #00B8D4;
+		}
+
+		#header ul {
+			margin:0;
+			padding:0;
+			list-style: none;
+			overflow: hidden;
+		}
+
+		#header li {
+			float:left;
+			padding:5px 10px;
+		}
+		#content {
+			min-height:500px;
+			padding:20px;
+		}
+		#footer {
+			height:100px;
+			line-height:100px;
+			text-align:center;
+			background:#00BCD4;
+			border-top:1px solid #424242}
+
+	</style>
 </head>
 <body>
 <div id="wrap">
@@ -57,8 +57,98 @@ body {
 </div>
 <script src="js/angular.min.js"></script>
 <script src="js/angular-route.min.js"></script>
-<!-- $resource를 사용하기 위해서  -->
 <script src="js/angular-resource.min.js"></script>
+<script>
+	var app = angular.module('resourceApp',['ngRoute', 'ngResource']);
+
+	// 서비스,팩토리를 이용해서 동적 객체 생성 후 필요한 컨트롤러에 주입
+	app.service('Todo', function($resource) {
+
+		return $resource(
+        'https://api.mlab.com/api/1/databases/jna/collections/todos/:id',
+            {
+                'apiKey': 'tFTRJmWy5IHOBim8tCb0RGF4jxPYFOWP',
+                'id': '@_id.$oid'// @는 객체 안의 속성 접근자
+            },
+			{}
+			},
+			{'update' : {'method', 'put'} }
+
+		);
+	});
+
+
+
+
+	app.config(function($routeProvider){
+		$routeProvider.when('/todo', {
+			'templateUrl' : 'view/todo.html',
+			'controller'  : 'todoCtrl'
+		});
+		$routeProvider.when('/write', {
+			'templateUrl' : 'view/write.html',
+			'controller'  : 'writeCtrl'
+		});
+		$routeProvider.otherwise({
+			'redirectTo' : '/todo'
+		})
+	});
+
+	app.controller('todoCtrl', ['$scope', '$http', function($scope, $http){
+
+
+		function getTodos(){
+			$scpre
+			$scope.loader = true;
+            Tood.query(function(data) {
+                $scopy.todos = data;
+                $copy.lloader + false;
+            })
+
+
+		};
+		getTodos();
+
+		$scope.removeTodo = function(todo){
+			$scope.loader = true;
+		    todo.$delete(function() {
+                getTodos();
+            })
+		};
+
+		$scope.editTodo = function(todo) {
+			$scope.loader = true;
+			var id = todo._id.$oid;
+			var title = todo.title;
+			var end = todo.end;
+//			var title = prompt('변경 할 제목을 입력하세요');
+			var promise = $http({
+				url : 'https://api.mlab.com/api/1/databases/jna/collections/todos/'+id,
+				method : 'put',
+				params : {
+					apiKey : 'tFTRJmWy5IHOBim8tCb0RGF4jxPYFOWP'
+				},
+				data : {
+					title : title,
+					end : end
+				}
+			})
+
+			promise.error(function(err){
+				console.log('err :', err);
+			});
+			promise.success(function(result){
+				$scope.loader = false;
+				getTodos();
+			});
+		}
+	}]);
+
+	app.controller('writeCtrl', ['$scope', '$http', '$location', function($scope, $http, $location){
+		$scope.writeTodo = function(title) {
+
+	}]);
+</script>
 
 </body>
 </html>

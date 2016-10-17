@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8"/>
+		<title>이펙트예제</title>
+		<link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/notosanskr.css" />
+		<style type="text/css">
+			#box {
+				width:1000px;
+				height:576px;
+				background:red;
+			}
+			button {
+				font:16px 'Noto Sans KR', sans-serif;
+				padding:8px 16px;
+			}
+		</style>
+
+	</head>
+	<body>
+		<p>
+			<button>show/hide</button>
+			<button>Fade In/Out</button>
+			<button>slide Up/Down</button>
+		</p>
+		<div id="box">
+			<img src="img/b_ryan.png" />
+		</div>
+	<script src="js/jquery.js"></script>
+	<script>
+		//1번째 버튼을 선택후 click이벤트리스너를 붙입니다.
+		$("button:eq(0)").click(function () {
+
+			//id가 box인요소를 선택하여
+			//원래 요소가 나타났다 사라지는 것은
+			//display속성값을 none <-> block(inline) 변경
+			//많이 사용되므로, css메서드보다 편리하게
+			//show() , hide(), toggle()
+			$("#box").toggle(500);
+
+		});//1번째 버튼 click end
+
+		$("button:eq(1)").click(function () {
+
+			//fadeIn(),fadeOut(),fadeToggle()
+			$("#box").fadeToggle();
+
+		});//2번째 버튼 click() end
+
+		$("button:eq(2)").click(function () {
+
+			//slideUp(), slideDown(), slideToggle()
+			$("#box").slideToggle();
+
+		});//3번째 버튼 click() end
+
+	</script>
+	</body>
+</html>

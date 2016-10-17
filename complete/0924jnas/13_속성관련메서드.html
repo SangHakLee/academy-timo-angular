@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta  charset="utf-8"/>
+		<title>속성관련메서드</title>
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+		<link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/notosanskr.css" />
+		<style>
+
+			body {
+				font-family: 'Noto Sans KR', sans-serif;
+			}
+			button {
+				font:16px 'Noto Sans KR', sans-serif;
+				padding:8px 16px;
+			}
+		</style>
+
+	</head>
+	<body>
+		<p>
+			<button>title얻기</button>
+			<button>src변경</button>
+            <button>속성여러개 변경</button>
+		</p>
+		<img src="img/b_ryan.png" alt="라이언" title="라이언"/>
+	<script src="js/jquery.js"></script>
+	<script>
+		//속성(attribute)관련 메서드
+		//1) attr(속성명,속성값) : 세터
+		//2) attr(속성명) : 겟터
+		//3) attr(객체) : 여러개의 속성 한번에 세터
+
+		//title얻기 버튼을 클릭했을때
+		$("button:eq(0)").click(function () {
+
+			//img요소를 선택후 title속성값을 얻기
+			var title = $("img").attr("title");
+
+			//출력
+			alert(title);
+
+		});//1번째 버튼 click() end
+
+		$("button:eq(1)").click(function () {
+			$("img").attr("src","img/b_muzi.png");
+		});//2번째 버튼 click() end
+
+		$("button:eq(2)").click(function () {
+
+			var obj = {
+				'width':"400",
+				height:300,
+				src:"img/b_con.png",
+				'alt':"콘",
+				"title":"콘"
+			};
+
+			$("img").attr(obj);
+
+		});//3번째 버튼 click() end
+
+
+	</script>
+	</body>
+</html>
+
+
+
+

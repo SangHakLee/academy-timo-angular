@@ -1,25 +1,30 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" ng-app="directiveApp">
 <head>
     <meta charset="UTF-8">
     <title>커스텀 디렉티브</title>
-    <style>
-        .box {
-            box-shadow:0 4px 10px #424242;
-            cursor: pointer;
-            position:absolute;/*좌표로 움직여야 하니까*/
-            left:0;
-            top:0;
-            background: #fff;
-            border:5px solid #999;
-        }
-        .box.move {
-            z-index: 1;
-        }
-    </style>
+    <link rel="stylesheet" href="directive/angular-canvas.box.css">
 </head>
-<body>
+<body ng-controller="ctrl">
 
 
+
+<canvas-box ng-repeat="data in dataList"></canvas-box>
+
+
+<script src="js/angular.min.js"></script>
+<script src="directive/angular-canvas.box.js"></script>
+<script>
+    var app = angular.module('directiveApp',['canvas-box']);
+
+    app.controller('ctrl', ['$scope', function($scope){
+        $scope.dataList = [
+            {color: 'skyblue', cWidth:100, cHeight:80, cX:10, xY:30, x:100, y:200, width:400, height:500},
+            {color: 'red', cWidth:150, cHeight:180, cX:20, xY:50, x:200, y:500, width:500, height:500}
+        ]
+    }]);
+
+
+</script>
 </body>
 </html>

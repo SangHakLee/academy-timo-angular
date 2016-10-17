@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8"/>
+		<title>css메서드</title>
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+		<link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/notosanskr.css" />
+		<style type="text/css">
+			body {
+				font-family: 'Noto Sans KR', sans-serif;
+			}
+			button {
+				font:16px 'Noto Sans KR', sans-serif;
+				padding:8px 16px;
+			}
+			#box {
+				width:400px;
+				height:300px;
+				border:1px solid #000;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<p>
+			<button>색상입력</button>
+			<button>높이얻기</button>
+			<button>여러개의 속성을 한번에 변경</button>
+		</p>
+		<div id='box'></div>
+	<script src="js/jquery.js"></script>
+	<script>
+
+		/*
+			프로그래밍은 데이터의 흐름
+			1) 세터(setter)
+			2) 겟터(getter)
+
+
+		 	예 : setAttribute();
+		      	 getAttribute();
+
+		  jquery는 setter,getter메서드의 이름이 같습니다.
+
+
+			jquery의 css메서드의 용법(API)
+
+			1) css(속성명,속성값) : setter
+			2) css(속성명) : getter
+			3) css(객체) : 여러개의 속성을 한번에 세팅
+
+		 */
+
+		//색상입력버튼을 클릭했을때
+		$("button:eq(0)").click(function () {
+			//id가 box인 요소를 선택하고
+			//뒷배경색을 파란색으로 세팅
+			$("#box").css("background","deepskyblue");
+
+		})//button click end
+
+		//높이얻기 버튼을 클릭했을때
+		$("button:eq(1)").click(function () {
+
+			//alert("우우우웅");
+
+			//1) 프로그래머 0부터
+			//2) getter는 변수로 받아라.
+
+			var height = $("#box").css("height");
+			alert(height);
+
+		});//높이얻기 button click() end
+
+	//여러개 속성을 한번에 변경
+		$("button:eq(2)").click(function () {
+			var width = 800;
+
+			$("#box").css({
+				           width:width,
+				           "height":600,
+				           "background":"url(img/b_ryan.png)",
+							"border":"50px dotted red"
+							});
+
+			//$("#box").height(600);
+
+
+		});//여러개속성변경버튼 click() end
+
+	</script>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

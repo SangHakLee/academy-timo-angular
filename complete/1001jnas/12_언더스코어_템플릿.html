@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>언더스코어 템플릿</title>
+	</head>
+	<body>
+		<h1>남자배우 리스트</h1>
+		<table border="1">
+			<caption>남자배우목록</caption>
+			<thead>
+				<tr>
+					<th>이름</th>
+					<th>키</th>
+					<th>몸무게</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td colspan="3">없습니다.</td>
+				</tr>
+			</tbody>
+		</table>
+		<!-- underscore템플릿 -->
+		<script type="text/template" id="trTmp">
+			<@ $(actors).each(function(){ @>
+			<tr>
+				<td><@=this.name@></td>
+				<td><@=this.height@></td>
+				<td><@=this.weight@></td>
+			</tr>
+			<@ })   @>
+		</script>
+	<script src="js/jquery.js"></script>
+	<script src="js/underscore.js"></script>
+	<script>
+
+		//% <-- 다른 기호로 세팅변경
+		_.templateSettings = {
+			interpolate: /\<\@\=(.+?)\@\>/gim,
+			evaluate: /\<\@(.+?)\@\>/gim,
+			escape: /\<\@\-(.+?)\@\>/gim
+		};
+
+
+		$.ajax("ajax/actors.json",{
+			dataType:"json",
+			type:"GET",
+			error:function(xhr,error,code){
+				alert(code);
+			},
+			success:function(json){
+				$("tbody").empty();
+
+				var tmp = _.template($("#trTmp").html());
+				var markup = tmp({actors:json});
+
+				$("tbody").append(markup);
+
+			}//success end
+		});//$.ajax() end
+
+	</script>
+	</body>
+</html>
+
+

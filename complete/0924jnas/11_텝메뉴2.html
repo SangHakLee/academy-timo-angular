@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+		<title>다음텝메뉴</title>
+		<link rel="stylesheet" href="css/reset.css" />
+		<style>
+		
+			#funGrpTab {
+				    height: 291px;
+    				padding-top: 36px;
+    				position: relative;
+				    width: 427px;
+				    padding-left: 25px;
+					margin:50px auto;
+					box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+			}
+			
+			#funGrpTab h3 {
+				height:22px;
+				position: absolute;
+				top:16px;
+			}
+			
+			#funGrpTab h3 a {
+				height:22px;
+				line-height: 22px;
+				display: block;
+			    height: 22px;
+			    line-height: 22px;
+			    text-align: center;
+			    color: #777b80;
+			    background: url(img/txt_daum_v9.png) no-repeat 0 0;
+			    letter-spacing: -1px;
+			    white-space: nowrap;
+			}
+			
+			.tit_fun {
+				left:15px;
+			}
+			.tit_tvpot {
+				left:61px;
+			}
+			.tit_bestlike {
+				left:115px;
+			}
+			.tit_realestate {
+				left: 158px;
+			}
+			.tit_miznet {
+				left: 212px;
+			}
+			
+			#funGrpTab .tit_fun a {
+				width:46px;
+			    background-position: 2px -96px;
+			}
+			#funGrpTab .tit_fun.on a {
+				background-position: 2px -66px;
+			}
+			#funGrpTab .tit_tvpot a {
+				width:54px;
+			    background-position: -40px -96px;
+			}
+			#funGrpTab .tit_tvpot.on a {
+				background-position: -40px -66px;
+			}
+			#funGrpTab .tit_bestlike a {
+			    width: 42px;
+			    background-position: -90px -96px;
+			}
+			#funGrpTab .tit_bestlike.on a {
+			    background-position: -90px -66px;
+			}
+			#funGrpTab .tit_realestate a {
+			   	width: 53px;
+				background-position: -130px -96px;
+			}
+			#funGrpTab .tit_realestate.on a {
+				background-position: -130px -66px;
+			}
+			#funGrpTab .tit_miznet a {
+			     width: 51px;
+				 background-position: -180px -96px;
+			}
+			#funGrpTab .tit_miznet.on a {
+				 background-position: -180px -66px;
+			}
+			
+			.ir_wa {
+			    display: block;
+			    overflow: hidden;
+			    position: relative;
+			    z-index: -1;
+			    width: 100%;
+			    height: 100%;
+			}
+			
+			
+			#fun,#tvpot,#bestlike,#realestate,#miznet {
+				width:427px;
+				height:250px;
+				position: absolute;
+				display: none;
+			}
+
+			#fun.on,
+			#tvpot.on,
+			#bestlike.on,
+			#realestate.on,
+			#miznet.on {
+				display: block;
+			}
+			
+			#fun {
+				background:url(img/fun.png);
+			}
+			#tvpot {
+				background:url(img/tvpot.png);
+			}
+			#bestlike {
+				background:url(img/bestlike.png);
+			}
+			#realestate {
+				background:url(img/realestate.png);
+			}
+			#miznet {
+				background:url(img/miznet.png);
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="funGrpTab">
+			<h3 id="funTab" class="tit_fun on">
+				<a href="">
+				<span class="ir_wa">FUN</span>
+				</a>
+			</h3>
+			<div id="fun" class="on">
+				<!-- 이미지로 대체-->
+			</div>
+			<h3 id="tvpotTab" class="tit_tvpot">
+				<a href="http://tvpot.daum.net/">
+					<span class="ir_wa">동영상</span>
+				</a>
+			</h3>
+			<div id="tvpot">
+				<!-- 이미지로 대체-->
+			</div>
+			<h3 id="bestlikeTab" class="tit_bestlike">
+				<a href="http://like.daum.net/best/daily">
+					<span class="ir_wa">공감</span>
+				</a>
+			</h3>
+			<div id="bestlike">
+				<!-- 이미지로 대체-->
+			</div>
+			<h3 id="realestateTab" class="tit_realestate">
+				<a href="http://realestate.daum.net/">
+					<span class="ir_wa">부동산</span>
+				</a>
+			</h3>
+			<div id="realestate">
+				<!-- 이미지로 대체-->
+			</div>
+			<h3 id="miznetTab" class="tit_miznet">
+				<a href="http://miznet.daum.net/">
+					<span class="ir_wa">미즈넷</span>
+				</a>
+			</h3>
+			<div id="miznet">
+				<!-- 이미지로 대체-->
+			</div>
+		</div>
+	<script src="js/jquery.js"></script>
+	<script>
+		$("#funGrpTab h3").click(function (evt) {
+			//evt는 이벤트객체
+			evt.preventDefault();//a 요소의 링크이동 막기
+
+			//기존.on제거
+			$(".on").removeClass("on");
+
+			//우리가 클릭한 그 요소에 클래스 on추가
+			$(this).addClass("on")
+					.next()//다음요소로 이동
+					.addClass("on");
+
+		});//#funGrpTab h3 click() end
+	</script>
+	</body>
+</html>

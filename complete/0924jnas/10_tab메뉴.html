@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>텝</title>
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+	@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+	body, h1, h2, h3, h4, input, button {
+		font-family: 'Nanum Gothic', "돋움", Dotum, Helvetica, "Apple SD Gothic Neo", sans-serif;
+		font-size: 12px;
+	}
+
+	.shop_wrap {
+		margin: 20px auto;
+		position: relative;
+		width: 304px;
+	}
+
+	.shop_header {
+		background-color: #f3f3f4;
+		border: 1px solid #d6d6d6;
+		height: 45px;
+		position: relative;
+	}
+
+	.shop_header h2 a {
+		background-attachment:
+				scroll
+	;
+		background-clip:
+				border-box
+	;
+		background-color:
+				rgba(0, 0, 0, 0)
+	;
+		background-image:
+				url("img/sp_shop160614.png")
+	;
+		background-origin:
+				padding-box
+	;
+		background-position:
+				-308px -182px
+	;
+		color:
+				rgb(47, 55, 67)
+	;
+		cursor:
+				auto
+	;
+		display:
+				block
+	;
+		font-family:
+				나눔고딕, NanumGothic, 돋움, Dotum, Helvetica, "Apple SD Gothic Neo", sans-serif
+	;
+		font-size:
+				12px
+	;
+		font-weight:
+				bold
+	;
+		height:
+				18px
+	;
+		left:
+				14px
+	;
+		letter-spacing:
+				-1px
+	;
+		line-height:
+				999px
+	;
+		overflow-x:
+				hidden
+	;
+		overflow-y:
+				hidden
+	;
+		position:
+				absolute
+	;
+		text-decoration:
+				none
+	;
+		top:
+				13px
+	;
+		vertical-align:
+				top
+	;
+		width:
+				53px
+	;
+	}
+
+	a {
+		color: #2f3743;
+		text-decoration: none;
+	}
+
+	.shop_tab {
+		overflow: hidden;
+		padding-left: 1px;
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+
+	.shop_tab li {
+		float: left;
+		margin-left: -1px;
+		position: relative;
+		line-height: 999px;
+		overflow: hidden;
+		vertical-align: top;
+		list-style: none outside none;
+	}
+
+	.shop_tab li.on {
+		z-index: 1;
+	}
+
+	.shop_tab li > a {
+		width: 56px;
+		height: 46px;
+		display: block;
+		background: url("img/sp_shop160614.png");
+	}
+	.shop_tab li:nth-child(1)> a {
+		background-position: -277px -50px;
+	}
+	.shop_tab li.on:nth-child(1)> a {
+		background-position: -277px -101px;
+	}
+	.shop_tab li:nth-child(2)> a {
+		background-position: -338px -50px;
+	}
+	.shop_tab li.on:nth-child(2)> a {
+		background-position: -338px -101px;
+	}
+
+	.shop_tab li:nth-child(3) {
+		width: 55px;
+	}
+	.shop_tab li:nth-child(3)> a {
+		background-position: -399px -50px;
+	}
+	.shop_tab li.on:nth-child(3)> a {
+		background-position: -399px -101px;
+	}
+
+	.shop_contents {
+		border: 1px solid #D6D6D6;
+		border-top: none;
+		width: 280px;
+		height: 730px;
+		padding: 7px 11px 0 11px;
+	}
+
+	.shop_contents .tab {
+		position: absolute;
+		display: none;
+	}
+
+	.shop_contents .tab.on {
+		display: block;
+	}
+
+</style>
+</head>
+<body>
+<div class="shop_wrap">
+	<div class="shop_header">
+		<h2><a href="http://shopping.naver.com">쇼핑</a></h2>
+		<ul class="shop_tab">
+			<li class="on">
+				<a href="" title="상품은 광고영역입니다.">상품</a>
+			</li>
+			<li>
+				<a href="" title="쇼핑몰은 광고영역입니다.">쇼핑몰</a>
+			</li>
+			<li>
+				<a href=""  title="MEN은 광고영역입니다.">맨즈</a>
+			</li>
+		</ul>
+	</div><!--shop header-->
+	<div class="shop_contents">
+		<div class="tab on">
+			<img src="img/tab1.png"/>
+		</div>
+		<div class="tab">
+			<img src="img/tab2.png"/>
+		</div>
+		<div class="tab">
+			<img src="img/tab3.png"/>
+		</div>
+	</div><!--contents-->
+</div>
+<script src="js/jquery.js"></script>
+<script>
+
+	//1) index를 얻어오는 방법 : index()
+	//2) 우리가 클릭한 그 요소?!!!!! :
+
+	//.shop_tab의 li선택하고 click이벤트리스너를 붙임
+	$(".shop_tab li").click(function (e) {
+		//a요소의 링크이동막기
+		e.preventDefault();
+
+		//기존의 on을 제거
+		$(".on").removeClass("on");
+
+		//우리가 클릭한 그 요소에 on을 add함
+		$(this).addClass("on");
+
+		//우리가 클릭한 그 요소의 index를 얻어옴
+		var idx = $(this).index();
+
+		//.tab을 선택한 후
+		$(".tab").eq(idx).addClass("on");
+
+	});//li click() end
+
+
+
+</script>
+</body>
+</html>
